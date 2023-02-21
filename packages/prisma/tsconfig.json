@@ -1,0 +1,9 @@
+{
+  "extends": "@aaw/tsconfig/base.json",
+    "display": "Default",
+    "include": ["."],
+    "exclude": ["dist", "build", "node_modules"],
+  }
+
+
+  

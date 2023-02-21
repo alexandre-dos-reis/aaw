@@ -1,4 +1,4 @@
-import { Button } from "ui";
+import { Button } from "@aaw/ui";
 
 export default function Docs() {
   return (

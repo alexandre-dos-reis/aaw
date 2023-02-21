@@ -1,0 +1,30 @@
+{
+  "name": "@aaw/prisma",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./prisma/client.ts",
+  "types": "./prisma/client.ts",
+  "prisma": {
+    "seed": "tsx prisma/seeds/run.ts"
+  },
+  "scripts": {
+    "db:push": "prisma db push --skip-generate",
+    "db:migration:create": "pnpm exec prisma migrate dev",
+    "db:migration:migrate": "pnpm exec prisma migrate deploy",
+    "db:reset": "pnpm exec prisma migrate reset --force --skip-seed",
+    "db:generate": "pnpm exec prisma generate",
+    "db:seed": "pnpm exec tsx prisma db seed"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0",
+    "@types/node": "^18.14.0",
+    "prisma": "^4.10.1",
+    "slugify": "^1.6.5",
+    "tsup": "^6.2.3",
+    "tsx": "^3.12.3"
+  },
+  "dependencies": {
+    "@aaw/tsconfig": "workspace:*",
+    "@prisma/client": "^4.10.1"
+  }
+}

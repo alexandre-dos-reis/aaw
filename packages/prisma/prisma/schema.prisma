@@ -1,0 +1,156 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("PRISMA_DATABASE_URL")
+}
+
+model Artwork {
+    id                  String             @id @default(cuid())
+    name                String
+    slug                String             @unique
+    description         String
+    createdAt           DateTime           @default(now())
+    updatedAt           DateTime           @updatedAt
+    madeAt              DateTime?
+    showInGallery       Boolean            @default(false)
+    showInPortfolio     Boolean            @default(false)
+    filename            String
+    watermarkedFilename String?
+    designState         String?
+    Artwork_Categories  Artwork_Category[]
+    products            Product[]
+}
+
+model Artwork_Category {
+    id          String   @id @default(cuid())
+    artwork_id  String
+    category_id String
+    artwork     Artwork  @relation(fields: [artwork_id], references: [id])
+    category    Category @relation(fields: [category_id], references: [id])
+
+    @@unique([artwork_id, category_id])
+}
+
+model Category {
+    id                 String             @id @default(cuid())
+    name               String
+    slug               String             @unique
+    description        String?
+    disposition        Int
+    updatedAt          DateTime           @updatedAt
+    showInGallery      Boolean            @default(false)
+    Artwork_Categories Artwork_Category[]
+}
+
+model ShopCategory {
+    id               String         @id @default(cuid())
+    updatedAt        DateTime       @updatedAt
+    name             String
+    slug             String
+    disposition      Int
+    parentCategoryId String?
+    products         Product[]
+    parentCategory   ShopCategory?  @relation("shopCatSelfRelation", fields: [parentCategoryId], references: [id])
+    subCategories    ShopCategory[] @relation("shopCatSelfRelation")
+}
+
+model Product {
+    id             String         @id @default(cuid())
+    createdAt      DateTime       @default(now())
+    updatedAt      DateTime       @updatedAt
+    name           String
+    slug           String         @unique
+    description    String
+    height         Int?
+    width          Int?
+    stock          Int
+    price          Int
+    forSale        Boolean        @default(false)
+    artworkId      String
+    shopCategoryId String
+    artwork        Artwork        @relation(fields: [artworkId], references: [id])
+    shopCategory   ShopCategory   @relation(fields: [shopCategoryId], references: [id])
+    productImage   ProductImage[]
+}
+
+model ProductImage {
+    id                  String  @id @default(cuid())
+    showInGallery       Boolean @default(false)
+    filename            String
+    watermarkedFilename String?
+    designState         String?
+    productId           String
+    product             Product @relation(fields: [productId], references: [id])
+}
+
+model Purchase {
+    id             String          @id @default(uuid())
+    stripeId       String
+    purchaseAt     DateTime        @default(now())
+    message        String?
+    status         PURCHASE_STATUS
+    trackingNumber String
+    email          String
+    weightCost     Int
+    insuranceCost  Int
+    addresses      Address[]
+    purchaseItems  PurchaseItem[]
+}
+
+model PurchaseItem {
+    id         String   @id @default(cuid())
+    name       String
+    quantity   Int
+    price      Int
+    purchaseId String
+    purchase   Purchase @relation(fields: [purchaseId], references: [id])
+}
+
+model Address {
+    id           String       @id @default(cuid())
+    type         ADDRESS_TYPE
+    fullname     String
+    addressLine1 String
+    addressLine2 String?
+    postalCode   String
+    city         String
+    country      String
+    phone        String?
+    purchaseId   String
+    purchase     Purchase     @relation(fields: [purchaseId], references: [id])
+}
+
+model ShippingCost {
+    id            String @id @default(cuid())
+    max           Int
+    weightCost    Int
+    insuranceCost Int
+}
+
+model AdminVariable {
+    id    String  @id @default(cuid())
+    key   VAR_KEY
+    value String
+}
+
+enum PURCHASE_STATUS {
+    WAITING_FOR_PAYMENT
+    IN_PREPARATION
+    DELIVERING
+    DELIVERED
+    CANCELED
+    REFUNDED
+}
+
+enum ADDRESS_TYPE {
+    SINGLE
+    DELIVERY
+    BILLING
+}
+
+enum VAR_KEY {
+    CGV
+}
