@@ -1,13 +1,19 @@
 import {
+  Create,
   Datagrid,
   Edit,
   List,
   ResourceProps,
+  SelectInput,
   SimpleForm,
   TextField,
   TextInput,
+  useCreateContext,
+  useEditContext,
+  useInput,
 } from "react-admin";
 import { resources } from "../resources.map";
+import { RichTextInput } from "ra-input-rich-text";
 
 export const variableResource: ResourceProps = {
   name: resources.adminVariable,
@@ -22,10 +28,34 @@ export const variableResource: ResourceProps = {
   ),
   edit: () => (
     <Edit>
-      <SimpleForm>
-        <TextInput source="key" disabled label="clé" />
-        <TextInput source="value" label="valeur" />
-      </SimpleForm>
+      <Form type="edit" />
     </Edit>
   ),
+  create: () => (
+    <Create>
+      <Form type="create" />
+    </Create>
+  ),
+};
+
+const Form = (p: { type: "edit" | "create" }) => {
+  return (
+    <SimpleForm>
+      <TextInput
+        source="key"
+        disabled={p.type === "edit"}
+        label="Nom de la clé"
+      />
+      <SelectInput
+        {...field}
+        choices={[
+          { id: "HTML", name: "HTML" },
+          { id: "STRING", name: "STRING" },
+        ]}
+        required
+        disabled={p.type === "edit"}
+      />
+      <RichTextInput source="value" label="contenu" />
+    </SimpleForm>
+  );
 };
