@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import slugify from "slugify";
-import { PrismaClient } from '../client';
+import { PrismaClient } from "../client";
 
 export async function gallerySeeds(prisma: PrismaClient) {
   const catsName = [
@@ -15,7 +15,7 @@ export async function gallerySeeds(prisma: PrismaClient) {
     data: catsName.map((c, i) => ({
       name: c,
       disposition: i + 1,
-      slug: slugify(c, { lower: true }),
+      slug: slugify(c + " " + faker.random.word(), { lower: true }),
       description: faker.random.words(20),
       showInGallery: true,
     })),
@@ -53,15 +53,19 @@ export async function gallerySeeds(prisma: PrismaClient) {
   const artworks = await prisma.artwork.findMany();
 
   artworks.map(async (a) => {
-    categories.map(async (c) => {
-      faker.helpers.maybe(async () => {
-        await prisma.artwork_Category.create({
-          data: {
-            artwork_id: a.id,
-            category_id: c.id,
-          },
-        });
-      });
+    const categoriesId = (
+      await prisma.category.findMany({
+        select: {
+          id: true,
+        },
+      })
+    ).map((c) => c.id);
+
+    await prisma.artwork_Category.create({
+      data: {
+        artwork_id: a.id,
+        category_id: faker.helpers.arrayElement(categoriesId),
+      },
     });
   });
 }

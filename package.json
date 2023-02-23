@@ -1,11 +1,15 @@
 {
-  "name": "atelier-amelie-core",
+  "name": "aaw",
   "version": "0.0.0",
   "private": true,
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
+  "prisma": {
+    "seed": "tsx prisma/seeds/run.ts",
+    "schema": "packages/prisma/src/schema.prisma"
+  },
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",

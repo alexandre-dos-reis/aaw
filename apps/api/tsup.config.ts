@@ -7,6 +7,4 @@ export default defineConfig({
   onSuccess: "node dist/index.js",
   splitting: false,
   sourcemap: true,
-  noExternal: ["@aaw/prisma"],
-  //   noExternal: [],
 });

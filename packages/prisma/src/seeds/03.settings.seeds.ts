@@ -1,4 +1,4 @@
-import { PrismaClient } from '../client';
+import { PrismaClient } from "../client";
 
 export async function settingsSeed(prisma: PrismaClient) {
   const shippingCostsArray = [
@@ -26,8 +26,8 @@ export async function settingsSeed(prisma: PrismaClient) {
   // App Variables
   await prisma.adminVariable.create({
     data: {
-      key: 'CGV',
-      value: '<div>CGV</div>',
+      key: "CGV",
+      value: "<div>CGV</div>",
     },
   });
 }

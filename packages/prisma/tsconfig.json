@@ -1,9 +1,5 @@
 {
-  "extends": "@aaw/tsconfig/base.json",
-    "display": "Default",
-    "include": ["."],
-    "exclude": ["dist", "build", "node_modules"],
-  }
-
-
-  
+  "extends": "@aaw/tsconfig/node16.json",
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "tsup.config.ts"],
+  "exclude": ["node_modules"]
+}

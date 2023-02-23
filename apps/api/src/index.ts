@@ -1,6 +1,6 @@
 import Fastify from "fastify";
 import { defaultHandler } from "ra-data-simple-prisma";
-import { PrismaClient } from "@aaw/prisma";
+import { prismaClient } from "@aaw/prisma";
 import cors from "@fastify/cors";
 
 const app = Fastify({
@@ -11,31 +11,12 @@ app.register(cors, {
   origin: "*",
 });
 
-declare type Send<T> = (body: T) => void;
-
-export type Response<T extends { data: any } = any> = {
-  json: Send<T>;
-};
-
-const prisma = new PrismaClient();
-
-app.get("/ra/*", async (req, reply) => {
-  const res: Response = {
-    json: (obj: any) => {
-      reply.send(obj);
-    },
-  };
-
-  await defaultHandler({ body: req.body as any }, res, prisma);
-});
-
-app.post("/ra/*", async (req, reply) => {
-  const res: Response = {
-    json: (obj: any) => {
-      reply.send(obj);
-    },
-  };
-  await defaultHandler({ body: req.body as any }, res, prisma);
+app.post("/ra/*", (req, reply) => {
+  defaultHandler(
+    { body: req.body as any },
+    { json: (data) => reply.send(data) },
+    prismaClient
+  );
 });
 
 (async () => {

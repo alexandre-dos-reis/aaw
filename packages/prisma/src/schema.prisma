@@ -22,16 +22,18 @@ model Artwork {
     designState         String?
     Artwork_Categories  Artwork_Category[]
     products            Product[]
+
+    @@map("artworks")
 }
 
 model Artwork_Category {
-    id          String   @id @default(cuid())
     artwork_id  String
     category_id String
-    artwork     Artwork  @relation(fields: [artwork_id], references: [id])
-    category    Category @relation(fields: [category_id], references: [id])
+    artwork     Artwork  @relation(fields: [artwork_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
-    @@unique([artwork_id, category_id])
+    @@id([artwork_id, category_id])
+    @@map("artworks_categories")
 }
 
 model Category {
@@ -43,6 +45,8 @@ model Category {
     updatedAt          DateTime           @updatedAt
     showInGallery      Boolean            @default(false)
     Artwork_Categories Artwork_Category[]
+
+    @@map("categories")
 }
 
 model ShopCategory {
@@ -55,6 +59,8 @@ model ShopCategory {
     products         Product[]
     parentCategory   ShopCategory?  @relation("shopCatSelfRelation", fields: [parentCategoryId], references: [id])
     subCategories    ShopCategory[] @relation("shopCatSelfRelation")
+
+    @@map("shop_categories")
 }
 
 model Product {
@@ -74,6 +80,8 @@ model Product {
     artwork        Artwork        @relation(fields: [artworkId], references: [id])
     shopCategory   ShopCategory   @relation(fields: [shopCategoryId], references: [id])
     productImage   ProductImage[]
+
+    @@map("products")
 }
 
 model ProductImage {
@@ -84,6 +92,8 @@ model ProductImage {
     designState         String?
     productId           String
     product             Product @relation(fields: [productId], references: [id])
+
+    @@map("product_images")
 }
 
 model Purchase {
@@ -98,6 +108,8 @@ model Purchase {
     insuranceCost  Int
     addresses      Address[]
     purchaseItems  PurchaseItem[]
+
+    @@map("purchases")
 }
 
 model PurchaseItem {
@@ -107,6 +119,8 @@ model PurchaseItem {
     price      Int
     purchaseId String
     purchase   Purchase @relation(fields: [purchaseId], references: [id])
+
+    @@map("purchase_items")
 }
 
 model Address {
@@ -121,6 +135,8 @@ model Address {
     phone        String?
     purchaseId   String
     purchase     Purchase     @relation(fields: [purchaseId], references: [id])
+
+    @@map("addresses")
 }
 
 model ShippingCost {
@@ -128,12 +144,16 @@ model ShippingCost {
     max           Int
     weightCost    Int
     insuranceCost Int
+
+    @@map("shipping_cost")
 }
 
 model AdminVariable {
     id    String  @id @default(cuid())
     key   VAR_KEY
     value String
+
+    @@map("admin_variables")
 }
 
 enum PURCHASE_STATUS {
@@ -143,14 +163,20 @@ enum PURCHASE_STATUS {
     DELIVERED
     CANCELED
     REFUNDED
+
+    @@map("purchases_statuses")
 }
 
 enum ADDRESS_TYPE {
     SINGLE
     DELIVERY
     BILLING
+
+    @@map("address_types")
 }
 
 enum VAR_KEY {
     CGV
+
+    @@map("var_keys")
 }

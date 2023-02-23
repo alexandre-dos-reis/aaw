@@ -1,16 +1,22 @@
-import { faker } from '@faker-js/faker';
-import slugify from 'slugify';
-import { PrismaClient } from '../client';
+import { faker } from "@faker-js/faker";
+import slugify from "slugify";
+import { PrismaClient } from "../client";
 
 export async function shopSeeds(prisma: PrismaClient) {
   const shopCategories = [
     {
-      parent: 'Oeuvres originales',
-      children: ['Enluminures', 'Calligraphies', 'Cartes', 'Marques-pages'],
+      parent: "Oeuvres originales",
+      children: ["Enluminures", "Calligraphies", "Cartes", "Marques-pages"],
     },
     {
-      parent: 'Reproductions',
-      children: ['Marques-pages', 'Cartes-Postales', 'Cartes A5', 'Cartes A4', 'Autres formats'],
+      parent: "Reproductions",
+      children: [
+        "Marques-pages",
+        "Cartes-Postales",
+        "Cartes A5",
+        "Cartes A4",
+        "Autres formats",
+      ],
     },
   ];
 
@@ -64,7 +70,7 @@ export async function shopSeeds(prisma: PrismaClient) {
         const name = faker.random.words();
         return {
           name,
-          slug: slugify(name + ' ' + faker.random.word(), { lower: true }),
+          slug: slugify(name + " " + faker.random.word(), { lower: true }),
           description: faker.random.words(20),
           price: faker.datatype.number({
             min: 1000,
@@ -84,7 +90,9 @@ export async function shopSeeds(prisma: PrismaClient) {
             max: 20,
           }),
           artworkId: artworks[i].id,
-          shopCategoryId: faker.helpers.arrayElement(shopCategoriesEntities.map((c) => c.id)),
+          shopCategoryId: faker.helpers.arrayElement(
+            shopCategoriesEntities.map((c) => c.id)
+          ),
         };
       }),
     });
@@ -100,7 +108,7 @@ export async function shopSeeds(prisma: PrismaClient) {
   products.forEach(async (p) => {
     await prisma.productImage.createMany({
       data: Array.from({ length: numberOfImages }).map((_) => ({
-        filename: faker.system.commonFileName('jpg'),
+        filename: faker.system.commonFileName("jpg"),
         productId: p.id,
         showInGallery: faker.helpers.arrayElement([true, false]),
       })),
