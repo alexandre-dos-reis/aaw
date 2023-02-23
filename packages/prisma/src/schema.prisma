@@ -112,6 +112,17 @@ model Purchase {
     @@map("purchases")
 }
 
+enum PURCHASE_STATUS {
+    WAITING_FOR_PAYMENT
+    IN_PREPARATION
+    DELIVERING
+    DELIVERED
+    CANCELED
+    REFUNDED
+
+    @@map("purchases_statuses")
+}
+
 model PurchaseItem {
     id         String   @id @default(cuid())
     name       String
@@ -139,6 +150,14 @@ model Address {
     @@map("addresses")
 }
 
+enum ADDRESS_TYPE {
+    SINGLE
+    DELIVERY
+    BILLING
+
+    @@map("address_types")
+}
+
 model ShippingCost {
     id            String @id @default(cuid())
     max           Int
@@ -149,35 +168,17 @@ model ShippingCost {
 }
 
 model AdminVariable {
-    id    String       @id @default(cuid())
-    key   VAR_KEY      @unique
+    id    VAR_KEY       @id
     value String
     type  VAR_KEY_TYPE
+    title String?
 
     @@map("admin_variables")
 }
 
-enum PURCHASE_STATUS {
-    WAITING_FOR_PAYMENT
-    IN_PREPARATION
-    DELIVERING
-    DELIVERED
-    CANCELED
-    REFUNDED
-
-    @@map("purchases_statuses")
-}
-
-enum ADDRESS_TYPE {
-    SINGLE
-    DELIVERY
-    BILLING
-
-    @@map("address_types")
-}
-
 enum VAR_KEY {
     CGV
+    TEST
 
     @@map("var_keys")
 }
@@ -185,5 +186,8 @@ enum VAR_KEY {
 enum VAR_KEY_TYPE {
     HTML
     STRING
+    INT
+    FLOAT
+
     @@map("var_key_types")
 }

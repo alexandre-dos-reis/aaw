@@ -23,20 +23,17 @@ export const categoryResource: ResourceProps = {
   list: () => (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source="id" />
         <TextField source="name" />
-        <TextField source="slug" />
+        <BooleanField source="showInGallery" />
         <TextField source="description" />
         <NumberField source="disposition" />
         <DateField source="updatedAt" />
-        <BooleanField source="showInGallery" />
       </Datagrid>
     </List>
   ),
   edit: () => (
     <Edit>
       <SimpleForm>
-        <TextInput source="id" />
         <TextInput source="name" />
         <TextInput source="slug" />
         <TextInput source="description" />

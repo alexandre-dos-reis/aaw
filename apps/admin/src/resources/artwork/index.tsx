@@ -16,6 +16,7 @@ import { resources } from "../resources.map";
 
 export const artworkResource: ResourceProps = {
   name: resources.artwork,
+  recordRepresentation: (r) => r.name,
   options: { label: "Oeuvres" },
   list: () => (
     <List>

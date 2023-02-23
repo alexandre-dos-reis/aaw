@@ -5,9 +5,7 @@ import {
   DateField,
   DateInput,
   Edit,
-  EditGuesser,
   List,
-  ListGuesser,
   NumberField,
   NumberInput,
   ReferenceField,
@@ -22,17 +20,12 @@ import { resources } from "../resources.map";
 export const productResource: ResourceProps = {
   name: resources.product,
   options: { label: "Produits" },
+  recordRepresentation: (r) => r.name,
   list: () => (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source="id" />
-        <DateField source="createdAt" />
-        <DateField source="updatedAt" />
         <TextField source="name" />
-        <TextField source="slug" />
-        <TextField source="description" />
-        <NumberField source="height" />
-        <NumberField source="width" />
+        <DateField source="updatedAt" />
         <NumberField source="stock" />
         <NumberField source="price" />
         <BooleanField source="forSale" />
