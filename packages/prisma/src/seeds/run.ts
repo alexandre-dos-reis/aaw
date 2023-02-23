@@ -1,4 +1,5 @@
-import { PrismaClient } from "../client";
+import { PrismaClient } from "../index";
+
 import { gallerySeeds, shopSeeds, settingsSeed, purchasesSeed } from ".";
 
 const prisma = new PrismaClient();

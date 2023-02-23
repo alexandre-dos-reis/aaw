@@ -1,4 +1,4 @@
-import { PrismaClient } from "../client";
+import { PrismaClient } from "../index";
 
 export async function settingsSeed(prisma: PrismaClient) {
   const shippingCostsArray = [

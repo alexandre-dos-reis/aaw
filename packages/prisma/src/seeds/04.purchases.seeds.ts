@@ -1,4 +1,4 @@
-import { PrismaClient, PURCHASE_STATUS } from "../client";
+import { PrismaClient, PURCHASE_STATUS } from "../index";
 import { faker } from "@faker-js/faker";
 
 export async function purchasesSeed(prisma: PrismaClient) {

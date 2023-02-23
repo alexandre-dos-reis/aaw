@@ -76,9 +76,9 @@ model Product {
     price          Int
     forSale        Boolean        @default(false)
     artworkId      String
-    shopCategoryId String
-    artwork        Artwork        @relation(fields: [artworkId], references: [id])
-    shopCategory   ShopCategory   @relation(fields: [shopCategoryId], references: [id])
+    shopCategoryId String?
+    artwork        Artwork        @relation(fields: [artworkId], references: [id], onDelete: Cascade)
+    shopCategory   ShopCategory?  @relation(fields: [shopCategoryId], references: [id], onDelete: SetNull)
     productImage   ProductImage[]
 
     @@map("products")
@@ -91,7 +91,7 @@ model ProductImage {
     watermarkedFilename String?
     designState         String?
     productId           String
-    product             Product @relation(fields: [productId], references: [id])
+    product             Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 
     @@map("product_images")
 }

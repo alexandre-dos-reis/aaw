@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import slugify from "slugify";
-import { PrismaClient } from "../client";
+import { PrismaClient } from "../index";
 
 export async function gallerySeeds(prisma: PrismaClient) {
   const catsName = [
