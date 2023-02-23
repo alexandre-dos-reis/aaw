@@ -1,4 +1,4 @@
-import { PrismaClient } from "../index";
+import { PrismaClient, VAR_KEY_TYPE } from "../index";
 
 export async function settingsSeed(prisma: PrismaClient) {
   const shippingCostsArray = [
@@ -28,6 +28,7 @@ export async function settingsSeed(prisma: PrismaClient) {
     data: {
       key: "CGV",
       value: "<div>CGV</div>",
+      type: VAR_KEY_TYPE.HTML,
     },
   });
 }

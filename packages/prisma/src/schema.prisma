@@ -149,9 +149,10 @@ model ShippingCost {
 }
 
 model AdminVariable {
-    id    String  @id @default(cuid())
-    key   VAR_KEY
+    id    String       @id @default(cuid())
+    key   VAR_KEY      @unique
     value String
+    type  VAR_KEY_TYPE
 
     @@map("admin_variables")
 }
@@ -179,4 +180,10 @@ enum VAR_KEY {
     CGV
 
     @@map("var_keys")
+}
+
+enum VAR_KEY_TYPE {
+    HTML
+    STRING
+    @@map("var_key_types")
 }
