@@ -15,11 +15,15 @@ importers:
   apps/admin:
     specifiers:
       '@aaw/prisma': workspace:^0.0.0
+      '@emotion/react': ^11.10.6
+      '@emotion/styled': ^11.10.6
+      '@mui/material': ^5.11.10
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
       '@vitejs/plugin-react': ^3.1.0
       ra-data-simple-prisma: ^2.1.2
       ra-input-rich-text: ^4.8.1
+      ra-ui-material: ^1.0.0
       react: ^18.2.0
       react-admin: ^4.8.1
       react-dom: ^18.2.0
@@ -27,8 +31,12 @@ importers:
       vite: ^4.1.0
     dependencies:
       '@aaw/prisma': link:../../packages/prisma
+      '@emotion/react': 11.10.6_pmekkgnqduwlme35zpnqhenc34
+      '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
+      '@mui/material': 5.11.10_xqeqsl5kvjjtyxwyi3jhw3yuli
       ra-data-simple-prisma: 2.1.2_zula6vjvt3wdocc4mwcxqa6nzi
-      ra-input-rich-text: 4.8.1_biqbaboplfbrettd7655fr4n2y
+      ra-input-rich-text: 4.8.1_fn4ukn7njhq3j6rnouvyofvwm4
+      ra-ui-material: 1.0.0_react@18.2.0
       react: 18.2.0
       react-admin: 4.8.1_zula6vjvt3wdocc4mwcxqa6nzi
       react-dom: 18.2.0_react@18.2.0
@@ -3941,7 +3949,7 @@ packages:
       - react-router-dom
     dev: false
 
-  /ra-input-rich-text/4.8.1_biqbaboplfbrettd7655fr4n2y:
+  /ra-input-rich-text/4.8.1_fn4ukn7njhq3j6rnouvyofvwm4:
     resolution: {integrity: sha512-OEfWzA0PwNnxcA1xtFIkGXQT3jcQNIdkwFI0x5B8EyogYRbbt2UryMNH8OGuDLLjPj3e2wq5e7g69N9hQnqqNQ==}
     peerDependencies:
       '@mui/icons-material': ^5.0.1
@@ -3951,6 +3959,7 @@ packages:
       react: ^16.9.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.9.0 || ^17.0.0 || ^18.0.0
     dependencies:
+      '@mui/material': 5.11.10_xqeqsl5kvjjtyxwyi3jhw3yuli
       '@tiptap/core': 2.0.0-beta.218_@tiptap+pm@2.0.0-beta.218
       '@tiptap/extension-color': 2.0.0-beta.218_zynsb2njebftevexpx7prxbqb4
       '@tiptap/extension-highlight': 2.0.0-beta.218_xixjdlstfbsoyvyes7aewz3ng4
@@ -3994,6 +4003,17 @@ packages:
       - react-native
       - react-router
       - react-router-dom
+    dev: false
+
+  /ra-ui-material/1.0.0_react@18.2.0:
+    resolution: {integrity: sha512-474JHg2diYCnUrm7o9wq4z0poxhuMLRIHLakPQFX6whJr6yuAHHrQunHCvneiEthBjhhPfEFrqRs7+xRFgfCHg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      '@material-ui/core': ^4.11.4
+      '@material-ui/icons': ^4.11.2
+      react: ^16.0.0
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /ra-ui-materialui/4.8.1_ghabl6rvqfoc7lteyso73ozh5i:
