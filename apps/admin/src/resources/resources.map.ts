@@ -1,26 +1,24 @@
 import { Prisma } from "@aaw/prisma/react";
 
-const Models = Prisma;
-
 export const resources = {
   artwork: {
-    name: Models.ModelName.Artwork,
-    fields: Models.ArtworkScalarFieldEnum,
+    name: Prisma.ModelName.Artwork,
+    fields: Prisma.ArtworkScalarFieldEnum,
   },
   category: {
-    name: Models.ModelName.Category,
-    fields: Models.CategoryScalarFieldEnum,
+    name: Prisma.ModelName.Category,
+    fields: Prisma.CategoryScalarFieldEnum,
   },
   product: {
-    name: Models.ModelName.Product,
-    fields: Models.ProductScalarFieldEnum,
+    name: Prisma.ModelName.Product,
+    fields: Prisma.ProductScalarFieldEnum,
   },
   shopCategory: {
-    name: Models.ModelName.ShopCategory,
-    fields: Models.ShopCategoryScalarFieldEnum,
+    name: Prisma.ModelName.ShopCategory,
+    fields: Prisma.ShopCategoryScalarFieldEnum,
   },
   adminVariable: {
-    name: Models.ModelName.AdminVariable,
-    fields: Models.AdminVariableScalarFieldEnum,
+    name: Prisma.ModelName.AdminVariable,
+    fields: Prisma.AdminVariableScalarFieldEnum,
   },
 } satisfies Record<string, { name: string; fields: Record<string, Object> }>;
