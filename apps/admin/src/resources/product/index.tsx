@@ -3,7 +3,6 @@ import {
   BooleanInput,
   Datagrid,
   DateField,
-  DateInput,
   Edit,
   List,
   NumberField,
@@ -15,14 +14,14 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
-import { resources } from "../resources.map";
+import { resources as r } from "../resources.map";
 
-const p = resources.product.fields;
-const a = resources.artwork.fields;
-const sc = resources.shopCategory.fields;
+const p = r.Product.fields;
+const a = r.Artwork.fields;
+const sc = r.ShopCategory.fields;
 
 export const productResource: ResourceProps = {
-  name: resources.product.name,
+  name: r.Product.name,
   options: { label: "Produits" },
   recordRepresentation: (r) => r.name,
   list: () => (
@@ -33,13 +32,10 @@ export const productResource: ResourceProps = {
         <NumberField source={p.stock} />
         <NumberField source={p.price} />
         <BooleanField source={p.forSale} />
-        <ReferenceField
-          source={p.artworkId}
-          reference={resources.artwork.name}
-        />
+        <ReferenceField source={p.artworkId} reference={r.Artwork.name} />
         <ReferenceField
           source={p.shopCategoryId}
-          reference={resources.shopCategory.name}
+          reference={r.ShopCategory.name}
         />
       </Datagrid>
     </List>
@@ -55,13 +51,10 @@ export const productResource: ResourceProps = {
         <NumberInput source={p.stock} />
         <NumberInput source={p.price} />
         <BooleanInput source={p.forSale} />
-        <ReferenceInput
-          source={p.artworkId}
-          reference={resources.artwork.name}
-        />
+        <ReferenceInput source={p.artworkId} reference={r.Artwork.name} />
         <ReferenceInput
           source={p.shopCategoryId}
-          reference={resources.shopCategory.name}
+          reference={r.ShopCategory.name}
         />
       </SimpleForm>
     </Edit>

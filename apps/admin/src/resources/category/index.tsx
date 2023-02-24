@@ -13,12 +13,12 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
-import { resources } from "../resources.map";
+import { resources as r } from "../resources.map";
 
-const c = resources.category.fields;
+const c = r.Category.fields;
 
 export const categoryResource: ResourceProps = {
-  name: resources.category.name,
+  name: r.Category.name,
   options: { label: "Catégories" },
   list: () => (
     <List>

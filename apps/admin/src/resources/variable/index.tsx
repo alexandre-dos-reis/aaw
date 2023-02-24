@@ -15,7 +15,7 @@ import { RichTextInput } from "ra-input-rich-text";
 import { VAR_KEY_TYPE } from "@aaw/prisma/react";
 
 export const variableResource: ResourceProps = {
-  name: r.adminVariable.name,
+  name: r.AdminVariable.name,
   options: { label: "Variables" },
   list: () => (
     <List>

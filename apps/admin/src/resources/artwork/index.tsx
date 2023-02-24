@@ -12,12 +12,12 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
-import { resources } from "../resources.map";
+import { resources as r } from "../resources.map";
 
-const a = resources.artwork.fields;
+const a = r.Artwork.fields;
 
 export const artworkResource: ResourceProps = {
-  name: resources.artwork.name,
+  name: r.Artwork.name,
   recordRepresentation: (r) => r.name,
   options: { label: "Oeuvres" },
   list: () => (

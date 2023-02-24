@@ -1,24 +1,51 @@
 import { Prisma } from "@aaw/prisma/react";
 
 export const resources = {
-  artwork: {
+  Artwork: {
     name: Prisma.ModelName.Artwork,
     fields: Prisma.ArtworkScalarFieldEnum,
   },
-  category: {
+  Category: {
     name: Prisma.ModelName.Category,
     fields: Prisma.CategoryScalarFieldEnum,
   },
-  product: {
+  Product: {
     name: Prisma.ModelName.Product,
     fields: Prisma.ProductScalarFieldEnum,
   },
-  shopCategory: {
+  ShopCategory: {
     name: Prisma.ModelName.ShopCategory,
     fields: Prisma.ShopCategoryScalarFieldEnum,
   },
-  adminVariable: {
+  AdminVariable: {
     name: Prisma.ModelName.AdminVariable,
     fields: Prisma.AdminVariableScalarFieldEnum,
   },
-} satisfies Record<string, { name: string; fields: Record<string, Object> }>;
+  Address: {
+    name: Prisma.ModelName.AdminVariable,
+    fields: Prisma.AddressScalarFieldEnum,
+  },
+  Artwork_Category: {
+    name: Prisma.ModelName.Artwork_Category,
+    fields: Prisma.Artwork_CategoryScalarFieldEnum,
+  },
+  ProductImage: {
+    name: Prisma.ModelName.ProductImage,
+    fields: Prisma.ProductImageScalarFieldEnum,
+  },
+  Purchase: {
+    name: Prisma.ModelName.Purchase,
+    fields: Prisma.PurchaseScalarFieldEnum,
+  },
+  PurchaseItem: {
+    name: Prisma.ModelName.PurchaseItem,
+    fields: Prisma.PurchaseItemScalarFieldEnum,
+  },
+  ShippingCost: {
+    name: Prisma.ModelName.ShippingCost,
+    fields: Prisma.ShippingCostScalarFieldEnum,
+  },
+} satisfies Record<
+  Prisma.ModelName,
+  { name: string; fields: Record<string, Object> }
+>;
