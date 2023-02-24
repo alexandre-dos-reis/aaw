@@ -5,9 +5,7 @@ import {
   DateField,
   DateInput,
   Edit,
-  EditGuesser,
   List,
-  ListGuesser,
   NumberField,
   NumberInput,
   ResourceProps,
@@ -17,29 +15,31 @@ import {
 } from "react-admin";
 import { resources } from "../resources.map";
 
+const c = resources.category.fields;
+
 export const categoryResource: ResourceProps = {
-    name: resources.category,
-    options: { label: "Catégories" },
+  name: resources.category.name,
+  options: { label: "Catégories" },
   list: () => (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source="name" />
-        <BooleanField source="showInGallery" />
-        <TextField source="description" />
-        <NumberField source="disposition" />
-        <DateField source="updatedAt" />
+        <TextField source={c.name} />
+        <BooleanField source={c.showInGallery} />
+        <TextField source={c.description} />
+        <NumberField source={c.disposition} />
+        <DateField source={c.updatedAt} />
       </Datagrid>
     </List>
   ),
   edit: () => (
     <Edit>
       <SimpleForm>
-        <TextInput source="name" />
-        <TextInput source="slug" />
-        <TextInput source="description" />
-        <NumberInput source="disposition" />
-        <DateInput source="updatedAt" />
-        <BooleanInput source="showInGallery" />
+        <TextInput source={c.name} />
+        <TextInput source={c.slug} />
+        <TextInput source={c.description} />
+        <NumberInput source={c.disposition} />
+        <DateInput source={c.updatedAt} />
+        <BooleanInput source={c.showInGallery} />
       </SimpleForm>
     </Edit>
   ),

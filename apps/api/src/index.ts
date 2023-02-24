@@ -1,11 +1,6 @@
 import Fastify, { FastifyRequest } from "fastify";
 import { defaultHandler } from "ra-data-simple-prisma";
-import {
-  prismaClient,
-  VAR_KEY_TYPE,
-  ADDRESS_TYPE,
-  PURCHASE_STATUS,
-} from "@aaw/prisma";
+import { prismaClient } from "@aaw/prisma";
 import cors from "@fastify/cors";
 
 const app = Fastify({

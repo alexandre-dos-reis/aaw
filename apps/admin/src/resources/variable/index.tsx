@@ -1,7 +1,6 @@
 import {
   Datagrid,
   Edit,
-  FunctionField,
   List,
   ResourceProps,
   SimpleForm,
@@ -9,11 +8,12 @@ import {
   TextInput,
   useRecordContext,
 } from "react-admin";
-import { resources } from "../resources.map";
+import { resources as r } from "../resources.map";
 import { RichTextInput } from "ra-input-rich-text";
+import { VAR_KEY_TYPE } from "@aaw/prisma/react";
 
 export const variableResource: ResourceProps = {
-  name: resources.adminVariable,
+  name: r.adminVariable.name,
   options: { label: "Variables" },
   list: () => (
     <List>
@@ -39,10 +39,10 @@ const Form = () => {
       <TextInput source="id" label="Clé unique de la varible" disabled />
       <TextInput source="type" label="Type" disabled />
       <TextInput source="title" label="Titre" />
-      {record.type === "HTML" ? (
+      {record.type === VAR_KEY_TYPE.HTML ? (
         <RichTextInput source="value" label="contenu" />
       ) : null}
-      {record.type === "STRING" ? (
+      {record.type === VAR_KEY_TYPE.STRING ? (
         <TextInput source="value" label="contenu" />
       ) : null}
     </SimpleForm>

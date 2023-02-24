@@ -11,6 +11,7 @@
     "schema": "packages/prisma/src/schema.prisma"
   },
   "scripts": {
+    "clean": "pnpm run -r clean",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",

@@ -5,12 +5,24 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "require": "./dist/react.js",
+      "import": "./dist/react.mjs",
+      "types": "./dist/react.d.ts"
+    } 
+  },
   "files": [
     "dist/**"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "pnpm generate && tsup",
+    "dev": "pnpm generate && tsup --watch",
     "clean": "rimraf .turbo node_modules dist",
     "db:push": "prisma db push --skip-generate --schema=src/schema.prisma",
     "db:migration:create": "pnpm exec prisma migrate dev --schema=src/schema.prisma",
@@ -18,8 +30,6 @@
     "db:reset": "pnpm exec prisma migrate reset --force --skip-seed --schema=src/schema.prisma",
     "db:drop": "pnpm exec prisma migrate reset --force --skip-seed --schema=src/schema.prisma",
     "db:seed": "pnpm db:drop && pnpm db:push && pnpm exec tsx src/seeds/run.ts",
-    "prebuild": "pnpm generate",
-    "predev": "pnpm generate",
     "generate": "pnpm exec prisma generate --schema=src/schema.prisma"
   },
   "devDependencies": {
