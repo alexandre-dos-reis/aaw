@@ -19,6 +19,7 @@ import { artworkResource } from "./resources/artwork";
 import { categoryResource } from "./resources/category";
 import { productResource } from "./resources/product";
 import { variableResource } from "./resources/variable";
+import { shopCategoryResource } from "./resources/shopCategory";
 
 export const App = () => (
   <Admin dataProvider={dataProvider("http://localhost:3002/ra")}>
@@ -26,6 +27,7 @@ export const App = () => (
     <Resource {...categoryResource} />
     <Resource {...productResource} />
     <Resource {...variableResource} />
+    <Resource {...shopCategoryResource} />
   </Admin>
 );
 

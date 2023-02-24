@@ -13,9 +13,11 @@ import { Grid } from "@mui/material";
 import { resources as r } from "../resources.map";
 import { RichTextInput } from "ra-input-rich-text";
 import { VAR_KEY_TYPE } from "@aaw/prisma/react";
+import { type AdminVariable } from "@aaw/prisma";
 
 export const variableResource: ResourceProps = {
   name: r.AdminVariable.name,
+  recordRepresentation: (r: AdminVariable) => r.title || r.type,
   options: { label: "Variables" },
   list: () => (
     <List>

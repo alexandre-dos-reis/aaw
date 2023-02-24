@@ -44,7 +44,7 @@ export const productResource: ResourceProps = {
     <Edit>
       <SimpleForm>
         <TextInput source={p.name} />
-        <TextInput source={p.slug} />
+        <TextInput source={p.slug} disabled />
         <TextInput source={p.description} />
         <NumberInput source={p.height} />
         <NumberInput source={p.width} />

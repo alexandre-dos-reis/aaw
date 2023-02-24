@@ -13,12 +13,13 @@ import {
   TextInput,
 } from "react-admin";
 import { resources as r } from "../resources.map";
+import { type Artwork } from "@aaw/prisma";
 
 const a = r.Artwork.fields;
 
 export const artworkResource: ResourceProps = {
   name: r.Artwork.name,
-  recordRepresentation: (r) => r.name,
+  recordRepresentation: (r: Artwork) => r.name,
   options: { label: "Oeuvres" },
   list: () => (
     <List>
@@ -44,12 +45,9 @@ export const artworkResource: ResourceProps = {
   edit: () => (
     <Edit>
       <SimpleForm>
-        <TextInput source={a.id} />
         <TextInput source={a.name} />
-        <TextInput source={a.slug} />
+        <TextInput source={a.slug} disabled/>
         <TextInput source={a.description} />
-        <DateInput source={a.createdAt} />
-        <DateInput source={a.updatedAt} />
         <TextInput source={a.madeAt} />
         <BooleanInput source={a.showInGallery} />
         <BooleanInput source={a.showInPortfolio} />

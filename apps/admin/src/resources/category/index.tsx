@@ -1,3 +1,4 @@
+import { type Category } from "@aaw/prisma";
 import {
   BooleanField,
   BooleanInput,
@@ -19,6 +20,7 @@ const c = r.Category.fields;
 
 export const categoryResource: ResourceProps = {
   name: r.Category.name,
+  recordRepresentation: (r: Category) => r.name,
   options: { label: "Catégories" },
   list: () => (
     <List>
@@ -35,7 +37,7 @@ export const categoryResource: ResourceProps = {
     <Edit>
       <SimpleForm>
         <TextInput source={c.name} />
-        <TextInput source={c.slug} />
+        <TextInput source={c.slug} disabled />
         <TextInput source={c.description} />
         <NumberInput source={c.disposition} />
         <DateInput source={c.updatedAt} />
