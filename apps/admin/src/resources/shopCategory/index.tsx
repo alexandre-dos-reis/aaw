@@ -1,5 +1,7 @@
 import type { ShopCategory, Category } from "@aaw/prisma";
+import { Grid } from "@mui/material";
 import {
+  AutocompleteInput,
   BooleanField,
   BooleanInput,
   Datagrid,
@@ -12,6 +14,7 @@ import {
   ReferenceField,
   ReferenceInput,
   ResourceProps,
+  SelectInput,
   SimpleForm,
   TextField,
   TextInput,
@@ -22,7 +25,59 @@ import { resources as r } from "../resources.map";
 
 const sc = r.ShopCategory.fields;
 
-const Name = (p: { label?: string }) => {
+export const shopCategoryResource: ResourceProps = {
+  name: r.ShopCategory.name,
+  recordRepresentation: (r: ShopCategory) => r.name,
+  options: { label: "Catégories" },
+  list: () => (
+    <List>
+      <Datagrid rowClick="edit">
+        <TextField source={sc.name} />
+        <TextField source={sc.disposition} />
+        <ReferenceField
+          source={sc.parentCategoryId}
+          reference={r.ShopCategory.name}
+          label="Catégorie parente"
+        >
+          <TextField source={sc.name} />
+        </ReferenceField>
+      </Datagrid>
+    </List>
+  ),
+  edit: () => (
+    <Edit>
+      <Form />
+    </Edit>
+  ),
+};
+
+const Form = () => (
+  <SimpleForm>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <TextInput source={sc.name} label="Titre" fullWidth />
+      </Grid>
+      <Grid item xs={6}>
+        <TextInput source={sc.slug} disabled fullWidth />
+      </Grid>
+    </Grid>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <ReferenceInput
+          source={sc.parentCategoryId}
+          reference={r.ShopCategory.name}
+        >
+          <SelectInput label="Catégorie associée" fullWidth />
+        </ReferenceInput>
+      </Grid>
+      <Grid item xs={3}>
+        <TextInput source={sc.disposition} fullWidth />
+      </Grid>
+    </Grid>
+  </SimpleForm>
+);
+
+const CategoryField = () => {
   const record = useRecordContext<ShopCategory>();
 
   const parentRecord = useGetOne<ShopCategory>(
@@ -40,34 +95,4 @@ const Name = (p: { label?: string }) => {
     : `${record.name}`;
 
   return <div>{name}</div>;
-};
-
-export const shopCategoryResource: ResourceProps = {
-  name: r.ShopCategory.name,
-  options: { label: "Catégories" },
-  list: () => (
-    <List>
-      <Datagrid rowClick="edit">
-        <Name label="Nom" />
-        <TextField source={sc.disposition} />
-        <ReferenceField
-          source={sc.parentCategoryId}
-          reference={r.ShopCategory.name}
-        />
-      </Datagrid>
-    </List>
-  ),
-  edit: () => (
-    <Edit>
-      <SimpleForm>
-        <TextInput source={sc.name} />
-        <TextInput source={sc.slug} disabled />
-        <TextInput source={sc.disposition} />
-        <ReferenceInput
-          source={sc.parentCategoryId}
-          reference={r.ShopCategory.name}
-        />
-      </SimpleForm>
-    </Edit>
-  ),
 };

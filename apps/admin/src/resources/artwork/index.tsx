@@ -3,10 +3,10 @@ import {
   BooleanInput,
   Create,
   Datagrid,
+  DateField,
   DateInput,
   Edit,
   List,
-  required,
   ResourceProps,
   SimpleForm,
   TextField,
@@ -14,6 +14,9 @@ import {
 } from "react-admin";
 import { resources as r } from "../resources.map";
 import { type Artwork } from "@aaw/prisma";
+import { Grid } from "@mui/material";
+import { GridContainer } from "../../components/form/GridContainer";
+import { GridItem } from "../../components/form/GridItem";
 
 const a = r.Artwork.fields;
 
@@ -25,7 +28,7 @@ export const artworkResource: ResourceProps = {
     <List>
       <Datagrid rowClick="edit">
         <TextField source={a.name} />
-        <TextField source={a.madeAt} />
+        <DateField source={a.madeAt} />
         <BooleanField source={a.showInGallery} />
         <TextField source={a.filename} />
         <TextField source={a.watermarkedFilename} />
@@ -35,26 +38,45 @@ export const artworkResource: ResourceProps = {
   ),
   create: () => (
     <Create>
-      <SimpleForm>
-        <TextInput source={a.name} validate={[required()]} fullWidth />
-        <TextInput source={a.slug} validate={[required()]} fullWidth />
-        <TextInput source={a.description} multiline label="Short description" />
-      </SimpleForm>
+      <Form />
     </Create>
   ),
   edit: () => (
     <Edit>
-      <SimpleForm>
-        <TextInput source={a.name} />
-        <TextInput source={a.slug} disabled/>
-        <TextInput source={a.description} />
-        <TextInput source={a.madeAt} />
-        <BooleanInput source={a.showInGallery} />
-        <BooleanInput source={a.showInPortfolio} />
-        <TextInput source={a.filename} />
-        <TextInput source={a.watermarkedFilename} />
-        <TextInput source={a.designState} />
-      </SimpleForm>
+      <Form />
     </Edit>
   ),
 };
+
+const Form = () => (
+  <SimpleForm>
+    <Grid container spacing={2}>
+      <Grid item xs={6}>
+        <TextInput source={a.name} label="Titre" fullWidth />
+      </Grid>
+      <Grid item xs={6}>
+        <TextInput source={a.slug} disabled fullWidth />
+      </Grid>
+    </Grid>
+    <TextInput source={a.description} multiline fullWidth />
+    <GridContainer>
+      <Grid item xs={4}>
+        <DateInput source={a.madeAt} label="Créée le" fullWidth />
+      </Grid>
+      <Grid
+        item
+        xs={4}
+        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      >
+        <BooleanInput
+          source={a.showInGallery}
+          label="Afficher dans la galerie ?"
+        />
+      </Grid>
+    </GridContainer>
+
+    {/* <TextInput source={a.filename} />
+    <TextInput source={a.watermarkedFilename} />
+    <TextInput source={a.designState} /> */}
+  </SimpleForm>
+);

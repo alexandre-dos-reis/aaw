@@ -168,10 +168,11 @@ model ShippingCost {
 }
 
 model AdminVariable {
-    id    VAR_KEY       @id
-    value String
+    id    VAR_KEY      @id
     type  VAR_KEY_TYPE
-    title String?
+    slug  String       @unique
+    title String
+    value String
 
     @@map("admin_variables")
 }
