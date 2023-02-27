@@ -35,17 +35,7 @@ export async function gallerySeeds(prisma: PrismaClient) {
           new Date().getDay(),
         description: faker.random.words(20),
         showInGallery: faker.helpers.arrayElement([true, false]),
-        // Artwork_Categories: {
-        //   createMany: {
-        //     data: {
-        //       category_id: faker.helpers.arrayElement(
-        //         categories.map((c) => {
-        //           return c.id;
-        //         })
-        //       ),
-        //     },
-        //   },
-        // },
+        madeAt: faker.helpers.maybe(() => faker.date.past(10)),
       },
     });
   }
@@ -61,11 +51,11 @@ export async function gallerySeeds(prisma: PrismaClient) {
       })
     ).map((c) => c.id);
 
-    await prisma.artwork_Category.create({
-      data: {
+    await prisma.artwork_Category.createMany({
+      data: faker.helpers.arrayElements(categoriesId).map((c) => ({
         artwork_id: a.id,
-        category_id: faker.helpers.arrayElement(categoriesId),
-      },
+        category_id: c,
+      })),
     });
   });
 }

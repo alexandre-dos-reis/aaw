@@ -1,5 +1,6 @@
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["clientExtensions"]
 }
 
 datasource db {
@@ -27,6 +28,7 @@ model Artwork {
 }
 
 model Artwork_Category {
+    id          String? // Needed for RA
     artwork_id  String
     category_id String
     artwork     Artwork  @relation(fields: [artwork_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
@@ -191,4 +193,19 @@ enum VAR_KEY_TYPE {
     FLOAT
 
     @@map("var_key_types")
+}
+
+model ModelMutation {
+    id           String @id
+    model        String
+    action       Action
+    previousData Json
+    currentData  Json
+    // user
+}
+
+enum Action {
+    EDIT
+    CREATE
+    DELETE
 }
