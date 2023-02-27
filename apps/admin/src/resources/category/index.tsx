@@ -27,10 +27,10 @@ export const categoryResource: ResourceProps = {
   list: () => (
     <List>
       <Datagrid rowClick="edit">
+        <NumberField source={c.disposition} />
         <TextField source={c.name} />
         <BooleanField source={c.showInGallery} />
         <TextField source={c.description} />
-        <NumberField source={c.disposition} />
         <DateField source={c.updatedAt} />
       </Datagrid>
     </List>
