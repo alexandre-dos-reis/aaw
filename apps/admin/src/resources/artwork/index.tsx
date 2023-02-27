@@ -31,12 +31,6 @@ const ac = r.Artwork_Category.fields;
 const c = r.Category.fields;
 const p = r.Product.fields;
 
-const Test = () => {
-  const record = useRecordContext();
-  console.log(record);
-  return <div>{record.id}</div>;
-};
-
 export const artworkResource: ResourceProps = {
   name: r.Artwork.name,
   recordRepresentation: (r: Artwork) => r.name,
@@ -49,9 +43,7 @@ export const artworkResource: ResourceProps = {
         <BooleanField source={a.showInGallery} label="Gallerie ?" />
         <FunctionField
           label="Filigrane ?"
-          render={(r: Artwork) =>
-            r.designState ? "X" : "O"
-          }
+          render={(r: Artwork) => (r.designState ? "X" : "O")}
         />
         <ReferenceManyCount
           label="# produits"
@@ -64,6 +56,7 @@ export const artworkResource: ResourceProps = {
           reference={r.Artwork_Category.name}
           target={ac.artwork_id}
           label="Catégories"
+          sort={{ field: ac.artwork_id, order: "asc" }}
         >
           <SingleFieldList linkType={false}>
             <ReferenceField reference={r.Category.name} source={ac.category_id}>
