@@ -7,10 +7,14 @@ import { variableResource } from "./resources/variable";
 import { shopCategoryResource } from "./resources/shopCategory";
 import { Layout } from "./components/layout/Layout";
 import { resources as r } from "./resources/resources.map";
-import { dataProvider } from "./providers/data-provider";
+import { dataProvider, i18nProvider } from "./providers";
 
 export const App = () => (
-  <Admin dataProvider={dataProvider} layout={Layout}>
+  <Admin
+    dataProvider={dataProvider}
+    layout={Layout}
+    i18nProvider={i18nProvider}
+  >
     <Resource {...artworkResource} />
     <Resource name={r.Artwork_Category.name} />
     <Resource {...categoryResource} />

@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@aaw/tsconfig": "workspace:*",
+    "@types/minio": "^7.0.16",
     "@types/node": "^15.12.2",
     "eslint": "^7.32.0",
     "pino-pretty": "^9.4.0",
