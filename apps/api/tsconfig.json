@@ -4,7 +4,11 @@
       "lib": ["ES2015"],
       "module": "commonjs",
       "outDir": "./dist",
-      "rootDir": "./src"
+      "rootDir": "./src",
+      "baseUrl": ".",
+      "paths": {
+        "~/*": ["src/*"]
+      }
     },
     "exclude": ["node_modules"],
     "extends": "@aaw/tsconfig/base.json",
