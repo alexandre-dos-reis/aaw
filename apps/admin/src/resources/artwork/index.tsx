@@ -21,23 +21,34 @@ import {
   useRecordContext,
 } from "react-admin";
 import { resources as r } from "~/resources/resources.map";
-import { type Artwork } from "@aaw/prisma";
+import { Category, type Artwork } from "@aaw/prisma";
 import { Grid } from "@mui/material";
 import { ThumbnailField } from "~/components/fields/ThumbnailField";
 import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
+import chroma from "chroma-js";
 
 const a = r.Artwork.fields;
 const ac = r.Artwork_Category.fields;
 const c = r.Category.fields;
 const p = r.Product.fields;
 
-const ColorChipField = ({
+const CategoryChipField = ({
   sourceColor,
   ...p
 }: ChipFieldProps & { sourceColor: string }) => {
-  const record = useRecordContext<RaRecord>();
-  console.log({ record, sourceColor });
-  return <ChipField {...p} style={{ backgroundColor: record[sourceColor] }} />;
+  const record = useRecordContext<Category>();
+  const color = chroma(record.color);
+  const dark = color.darken(2).hex();
+  return (
+    <ChipField
+      {...p}
+      style={{
+        backgroundColor: color.brighten(2).alpha(0.6).hex(),
+        border: `1px solid ${dark}`,
+        color: dark,
+      }}
+    />
+  );
 };
 
 export const artworkResource: ResourceProps = {
@@ -69,7 +80,7 @@ export const artworkResource: ResourceProps = {
         >
           <SingleFieldList linkType={false}>
             <ReferenceField reference={r.Category.name} source={ac.category_id}>
-              <ColorChipField source={c.name} sourceColor={c.color} />
+              <CategoryChipField source={c.name} sourceColor={c.color} />
             </ReferenceField>
           </SingleFieldList>
         </ReferenceManyField>
