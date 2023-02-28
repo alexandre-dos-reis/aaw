@@ -11,11 +11,11 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     },
-    "./react": {
-      "require": "./dist/react.js",
-      "import": "./dist/react.mjs",
-      "types": "./dist/react.d.ts"
-    } 
+    "./browser": {
+      "require": "./dist/browser.js",
+      "import": "./dist/browser.mjs",
+      "types": "./dist/browser.d.ts"
+    }
   },
   "files": [
     "dist/**"
@@ -29,11 +29,14 @@
     "db:reset": "pnpm exec prisma migrate reset --force --skip-seed --schema=src/schema.prisma",
     "db:drop": "pnpm exec prisma migrate reset --force --skip-seed --schema=src/schema.prisma",
     "db:seed": "pnpm db:drop && pnpm db:push && pnpm exec tsx src/seeds/run.ts",
-    "generate": "pnpm exec prisma generate --schema=src/schema.prisma"
+    "generate": "pnpm exec prisma generate --schema=src/schema.prisma",
+    "minio:test": "pnpm exec tsx src/seeds/05.minio.seeds.ts"
   },
   "devDependencies": {
+    "@aaw/minio": "workspace:^1.0.0",
     "@aaw/tsconfig": "workspace:*",
     "@faker-js/faker": "^7.6.0",
+    "@paralleldrive/cuid2": "^2.2.0",
     "@types/node": "^18.14.0",
     "prisma": "^4.10.1",
     "rimraf": "^4.1.2",

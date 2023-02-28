@@ -1,3 +1,4 @@
+import { minio } from "@aaw/minio";
 import { faker } from "@faker-js/faker";
 import slugify from "slugify";
 import { PrismaClient } from "../index";
@@ -19,6 +20,10 @@ export async function shopSeeds(prisma: PrismaClient) {
       ],
     },
   ];
+
+  const objects = await minio.listObjectsAsync(
+    process.env.MINIO_IMAGES_BUCKET_NAME as string
+  );
 
   shopCategories.map(async (sc, i) => {
     // SHOP PARENT CATEGORIES
@@ -108,7 +113,7 @@ export async function shopSeeds(prisma: PrismaClient) {
   products.forEach(async (p) => {
     await prisma.productImage.createMany({
       data: Array.from({ length: numberOfImages }).map((_) => ({
-        filename: faker.system.commonFileName("jpg"),
+        filename: faker.helpers.arrayElement(objects),
         productId: p.id,
         showInGallery: faker.helpers.arrayElement([true, false]),
       })),

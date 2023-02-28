@@ -1,6 +1,7 @@
 import { faker } from "@faker-js/faker";
 import slugify from "slugify";
 import { PrismaClient } from "../index";
+import { minio } from "@aaw/minio";
 
 export async function gallerySeeds(prisma: PrismaClient) {
   const catsName = [
@@ -16,19 +17,22 @@ export async function gallerySeeds(prisma: PrismaClient) {
       name: c,
       disposition: i + 1,
       slug: slugify(c + " " + faker.random.word(), { lower: true }),
+      color: faker.color.rgb(),
       description: faker.random.words(20),
       showInGallery: true,
     })),
   });
 
-  const categories = await prisma.category.findMany();
+  const objects = await minio.listObjectsAsync(
+    process.env.MINIO_IMAGES_BUCKET_NAME as string
+  );
 
   for (let i = 0; i < 50; i++) {
     const name = faker.random.words();
 
     await prisma.artwork.create({
       data: {
-        filename: "Manet.jpg",
+        filename: faker.helpers.arrayElement(objects),
         name,
         slug:
           slugify(name + " " + faker.random.word(), { lower: true }) +

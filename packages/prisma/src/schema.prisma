@@ -43,6 +43,7 @@ model Category {
     slug               String             @unique
     description        String?
     disposition        Int
+    color              String
     updatedAt          DateTime           @updatedAt
     showInGallery      Boolean            @default(false)
     Artwork_Categories Artwork_Category[]
