@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
-import { PrismaClient, prismaClient } from "@aaw/prisma";
+import { PrismaClient } from "@aaw/prisma";
 import fp from "fastify-plugin";
 
 declare module "fastify" {
@@ -10,9 +10,10 @@ declare module "fastify" {
 
 export const prismaPlugin: FastifyPluginAsync = fp(
   async (app: FastifyInstance) => {
-    await prismaClient.$connect();
+    const prisma = new PrismaClient();
+    await prisma.$connect();
 
-    app.decorate("prisma", prismaClient);
+    app.decorate("prisma", prisma);
     app.log.info("Prisma plugin registered.");
 
     app.addHook("onClose", async (app) => {
