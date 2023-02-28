@@ -1,16 +1,10 @@
 import type { ShopCategory, Category } from "@aaw/prisma";
 import { Grid } from "@mui/material";
 import {
-  AutocompleteInput,
-  BooleanField,
-  BooleanInput,
+  Create,
   Datagrid,
-  DateField,
-  DateInput,
   Edit,
   List,
-  NumberField,
-  NumberInput,
   ReferenceField,
   ReferenceInput,
   ResourceProps,
@@ -21,7 +15,7 @@ import {
   useGetOne,
   useRecordContext,
 } from "react-admin";
-import { resources as r } from "../resources.map";
+import { resources as r } from "~/resources/resources.map";
 
 const sc = r.ShopCategory.fields;
 
@@ -32,8 +26,8 @@ export const shopCategoryResource: ResourceProps = {
   list: () => (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source={sc.name} />
         <TextField source={sc.disposition} />
+        <TextField source={sc.name} />
         <ReferenceField
           source={sc.parentCategoryId}
           reference={r.ShopCategory.name}
@@ -48,6 +42,11 @@ export const shopCategoryResource: ResourceProps = {
     <Edit>
       <Form />
     </Edit>
+  ),
+  create: () => (
+    <Create>
+      <Form />
+    </Create>
   ),
 };
 

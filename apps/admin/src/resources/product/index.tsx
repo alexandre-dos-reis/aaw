@@ -20,7 +20,10 @@ import {
   useGetOne,
   useRecordContext,
 } from "react-admin";
-import { resources as r } from "../resources.map";
+import { PriceField } from "~/components/fields/PriceField";
+import { PriceInput } from "~/components/inputs/PriceInput";
+import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
+import { resources as r } from "~/resources/resources.map";
 
 const p = r.Product.fields;
 const a = r.Artwork.fields;
@@ -53,12 +56,16 @@ export const productResource: ResourceProps = {
   list: () => (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source={p.name} />
-        <DateField source={p.updatedAt} />
+        <TextField source={p.name} label="Nom" />
+        <DateField source={p.updatedAt} label="Modifié le" />
         <NumberField source={p.stock} />
-        <NumberField source={p.price} />
-        <BooleanField source={p.forSale} />
-        <ReferenceField source={p.artworkId} reference={r.Artwork.name} />
+        <PriceField source={p.price} label="Prix €" />
+        <BooleanField source={p.forSale} label="En vente ?" />
+        <ReferenceField
+          source={p.artworkId}
+          reference={r.Artwork.name}
+          label="Oeuvre"
+        />
         <ReferenceField
           label="Catégorie"
           source={p.shopCategoryId}
@@ -88,7 +95,13 @@ const Form = () => (
         <TextInput source={p.name} fullWidth label="Titre" />
       </Grid>
       <Grid item xs={6}>
-        <TextInput source={p.slug} disabled fullWidth />
+        <WatchedSlugInput
+          sourceToWatch={a.name}
+          source={a.slug}
+          label="Slug"
+          disabled
+          fullWidth
+        />
       </Grid>
     </Grid>
     <TextInput source={p.description} fullWidth multiline />
@@ -103,7 +116,7 @@ const Form = () => (
         <NumberInput source={p.stock} fullWidth />
       </Grid>
       <Grid item xs={3}>
-        <NumberInput source={p.price} fullWidth label="Prix €" />
+        <PriceInput source={p.price} fullWidth label="Prix €" />
       </Grid>
     </Grid>
     <Grid container spacing={2}>
@@ -119,10 +132,7 @@ const Form = () => (
         <BooleanInput source={p.forSale} label="En vente ?" />
       </Grid>
       <Grid item xs={4}>
-        <ReferenceInput
-          source={p.artworkId}
-          reference={r.Artwork.name}
-        >
+        <ReferenceInput source={p.artworkId} reference={r.Artwork.name}>
           <SelectInput label="Oeuvre associée" fullWidth />
         </ReferenceInput>
       </Grid>

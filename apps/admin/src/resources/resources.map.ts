@@ -1,4 +1,4 @@
-import { Prisma } from "@aaw/prisma/react";
+import { Prisma } from "@aaw/prisma/browser";
 
 export const resources = {
   Artwork: {
@@ -44,6 +44,10 @@ export const resources = {
   ShippingCost: {
     name: Prisma.ModelName.ShippingCost,
     fields: Prisma.ShippingCostScalarFieldEnum,
+  },
+  ModelMutation: {
+    name: Prisma.ModelName.ModelMutation,
+    fields: Prisma.ModelMutationScalarFieldEnum,
   },
 } satisfies Record<
   Prisma.ModelName,

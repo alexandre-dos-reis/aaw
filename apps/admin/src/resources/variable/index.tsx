@@ -9,11 +9,11 @@ import {
   useRecordContext,
 } from "react-admin";
 import { Grid } from "@mui/material";
-
-import { resources as r } from "../resources.map";
+import { resources as r } from "~/resources/resources.map";
 import { RichTextInput } from "ra-input-rich-text";
-import { VAR_KEY_TYPE } from "@aaw/prisma/react";
+import { VAR_KEY_TYPE } from "@aaw/prisma/browser";
 import { type AdminVariable } from "@aaw/prisma";
+import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
 
 const av = r.AdminVariable.fields;
 
@@ -45,7 +45,13 @@ const Form = () => {
           <TextInput source={av.title} label="Titre" fullWidth />
         </Grid>
         <Grid item xs={6}>
-          <TextInput source={av.slug} label="Slug" disabled fullWidth />
+          <WatchedSlugInput
+            sourceToWatch={av.title}
+            source={av.slug}
+            label="Slug"
+            disabled
+            fullWidth
+          />
         </Grid>
       </Grid>
       {record.type === VAR_KEY_TYPE.HTML ? (

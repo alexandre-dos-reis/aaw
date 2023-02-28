@@ -2,34 +2,43 @@ import {
   BooleanField,
   BooleanInput,
   ChipField,
+  ChipFieldProps,
   Create,
   Datagrid,
-  DateField,
   DateInput,
   Edit,
   FunctionField,
   List,
+  RaRecord,
   ReferenceField,
   ReferenceManyCount,
   ReferenceManyField,
   ResourceProps,
   SimpleForm,
-  SimpleList,
   SingleFieldList,
   TextField,
   TextInput,
   useRecordContext,
 } from "react-admin";
-import { resources as r } from "../resources.map";
+import { resources as r } from "~/resources/resources.map";
 import { type Artwork } from "@aaw/prisma";
 import { Grid } from "@mui/material";
-import { GridContainer } from "../../components/form/GridContainer";
-import { GridItem } from "../../components/form/GridItem";
+import { ThumbnailField } from "~/components/fields/ThumbnailField";
+import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
 
 const a = r.Artwork.fields;
 const ac = r.Artwork_Category.fields;
 const c = r.Category.fields;
 const p = r.Product.fields;
+
+const ColorChipField = ({
+  sourceColor,
+  ...p
+}: ChipFieldProps & { sourceColor: string }) => {
+  const record = useRecordContext<RaRecord>();
+  console.log({ record, sourceColor });
+  return <ChipField {...p} style={{ backgroundColor: record[sourceColor] }} />;
+};
 
 export const artworkResource: ResourceProps = {
   name: r.Artwork.name,
@@ -38,7 +47,7 @@ export const artworkResource: ResourceProps = {
   list: () => (
     <List>
       <Datagrid rowClick="edit">
-        <TextField source={a.filename} label="" />
+        <ThumbnailField source={a.filename} label="" />
         <TextField source={a.name} label="Titre" />
         <BooleanField source={a.showInGallery} label="Gallerie ?" />
         <FunctionField
@@ -60,7 +69,7 @@ export const artworkResource: ResourceProps = {
         >
           <SingleFieldList linkType={false}>
             <ReferenceField reference={r.Category.name} source={ac.category_id}>
-              <ChipField source={c.name} />
+              <ColorChipField source={c.name} sourceColor={c.color} />
             </ReferenceField>
           </SingleFieldList>
         </ReferenceManyField>
@@ -86,11 +95,17 @@ const Form = () => (
         <TextInput source={a.name} label="Titre" fullWidth />
       </Grid>
       <Grid item xs={6}>
-        <TextInput source={a.slug} disabled fullWidth />
+        <WatchedSlugInput
+          sourceToWatch={a.name}
+          source={a.slug}
+          label="Slug"
+          disabled
+          fullWidth
+        />
       </Grid>
     </Grid>
     <TextInput source={a.description} multiline fullWidth />
-    <GridContainer>
+    <Grid container spacing={2}>
       <Grid item xs={4}>
         <DateInput source={a.madeAt} label="Créée le" fullWidth />
       </Grid>
@@ -104,7 +119,7 @@ const Form = () => (
           label="Afficher dans la galerie ?"
         />
       </Grid>
-    </GridContainer>
+    </Grid>
 
     {/* <TextInput source={a.filename} />
     <TextInput source={a.watermarkedFilename} />

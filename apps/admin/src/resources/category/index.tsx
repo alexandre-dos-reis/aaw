@@ -6,7 +6,6 @@ import {
   Create,
   Datagrid,
   DateField,
-  DateInput,
   Edit,
   List,
   NumberField,
@@ -16,7 +15,8 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
-import { resources as r } from "../resources.map";
+import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
+import { resources as r } from "~/resources/resources.map";
 
 const c = r.Category.fields;
 
@@ -54,7 +54,13 @@ const Form = () => (
         <TextInput source={c.name} fullWidth label="Titre" />
       </Grid>
       <Grid item xs={6}>
-        <TextInput source={c.slug} fullWidth disabled />
+        <WatchedSlugInput
+          sourceToWatch={c.name}
+          source={c.slug}
+          label="Slug"
+          disabled
+          fullWidth
+        />
       </Grid>
     </Grid>
     <TextInput source={c.description} fullWidth multiline />
