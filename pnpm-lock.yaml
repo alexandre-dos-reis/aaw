@@ -22,6 +22,8 @@ importers:
       '@types/chroma-js': ^2.4.0
       '@types/react': ^18.0.27
       '@types/react-dom': ^18.0.10
+      '@uiw/react-color-circle': ^1.1.2
+      '@uiw/react-color-github': ^1.1.2
       '@vitejs/plugin-react': ^3.1.0
       chroma-js: ^2.4.2
       ra-data-simple-prisma: ^2.1.2
@@ -43,6 +45,8 @@ importers:
       '@emotion/styled': 11.10.6_oouaibmszuch5k64ms7uxp2aia
       '@material-ui/core': 4.12.4_zula6vjvt3wdocc4mwcxqa6nzi
       '@mui/material': 5.11.10_xqeqsl5kvjjtyxwyi3jhw3yuli
+      '@uiw/react-color-circle': 1.1.2_biqbaboplfbrettd7655fr4n2y
+      '@uiw/react-color-github': 1.1.2_biqbaboplfbrettd7655fr4n2y
       chroma-js: 2.4.2
       ra-data-simple-prisma: 2.1.2_zula6vjvt3wdocc4mwcxqa6nzi
       ra-i18n-polyglot: 4.8.1_bamyqy2r5urjalaw4du2uschzm
@@ -331,6 +335,13 @@ packages:
       '@babel/core': 7.21.0
       '@babel/helper-plugin-utils': 7.20.2
     dev: true
+
+  /@babel/runtime/7.19.4:
+    resolution: {integrity: sha512-EXpLCrk55f+cYqmHsSR+yD/0gAIMxxA9QK9lnQWzhMCvt+YmoBN7Zx94s++Kv0+unHk39vxNO8t+CMA2WSS3wA==}
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      regenerator-runtime: 0.13.11
+    dev: false
 
   /@babel/runtime/7.21.0:
     resolution: {integrity: sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==}
@@ -1980,6 +1991,48 @@ packages:
 
   /@types/throttle-debounce/2.1.0:
     resolution: {integrity: sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==}
+    dev: false
+
+  /@uiw/color-convert/1.1.2:
+    resolution: {integrity: sha512-AgnyNM+09XcX90+U6K6LvdGfkNEYVv6YcnxpqgINkAxJOgC+aCck3GH8W0jsIg2u/wOjmWoMT7BctZY2q/H2Dg==}
+    dev: false
+
+  /@uiw/react-color-circle/1.1.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-5zwIf947r9DIyksSnETwW5LX905OLFNELtE+WZt8b9b1G8E6gseij8rfMNEy5RjlIv+IxCZfG98VIOQ7vaYnWQ==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@babel/runtime': 7.19.4
+      '@uiw/color-convert': 1.1.2
+      '@uiw/react-color-swatch': 1.1.2_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@uiw/react-color-github/1.1.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-bRrvTr3UrZsVQOM467Y+00E9dPJqhKFkfdIHvZyX4bFCt7G/VHsSPOxtVnqMGIKSTulgahbs+TK7FDsoLWuotg==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@babel/runtime': 7.19.4
+      '@uiw/color-convert': 1.1.2
+      '@uiw/react-color-swatch': 1.1.2_biqbaboplfbrettd7655fr4n2y
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@uiw/react-color-swatch/1.1.2_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Q75Z+XfUW+6ZDGyZi0RaPbs206eJiBMcj57BhZ0CbLpy2hRHkH5Auuwe+Xx2mnGYBpgeRqTGQwnXkraFEAdRkw==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+    dependencies:
+      '@babel/runtime': 7.19.4
+      '@uiw/color-convert': 1.1.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /@vitejs/plugin-react/3.1.0_vite@4.1.3:

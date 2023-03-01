@@ -15,6 +15,7 @@ import {
   TextField,
   TextInput,
 } from "react-admin";
+import { ColorPickerInput } from "~/components/inputs/ColorPickerInput";
 import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
 import { resources as r } from "~/resources/resources.map";
 
@@ -78,6 +79,18 @@ const Form = () => (
           fullWidth
           label="Afficher dans la galerie ?"
         />
+      </Grid>
+      <Grid
+        item
+        xs={4}
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <ColorPickerInput source={c.color} />
       </Grid>
     </Grid>
   </SimpleForm>
