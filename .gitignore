@@ -36,4 +36,5 @@ yarn-error.log*
 **/dist
 
 # images for seed / fixtures
-images-samples
+images-samples/*
+!images-samples/.gitkeep
