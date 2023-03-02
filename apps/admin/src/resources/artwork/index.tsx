@@ -1,31 +1,27 @@
 import {
   BooleanField,
-  BooleanInput,
   ChipField,
   ChipFieldProps,
   Create,
   Datagrid,
-  DateInput,
   Edit,
   FunctionField,
   List,
-  RaRecord,
   ReferenceField,
   ReferenceManyCount,
   ReferenceManyField,
   ResourceProps,
-  SimpleForm,
   SingleFieldList,
   TextField,
-  TextInput,
   useRecordContext,
 } from "react-admin";
 import { resources as r } from "~/resources/resources.map";
 import { Category, type Artwork } from "@aaw/prisma";
-import { Grid } from "@mui/material";
+
 import { ThumbnailField } from "~/components/fields/ThumbnailField";
-import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
+
 import chroma from "chroma-js";
+import { Form } from "./Form";
 
 const a = r.Artwork.fields;
 const ac = r.Artwork_Category.fields;
@@ -89,51 +85,12 @@ export const artworkResource: ResourceProps = {
   ),
   create: () => (
     <Create>
-      <Form />
+      <Form type="create" />
     </Create>
   ),
   edit: () => (
-    <Edit>
-      <Form />
+    <Edit redirect={false} mutationMode="pessimistic">
+      <Form type="edit" />
     </Edit>
   ),
 };
-
-const Form = () => (
-  <SimpleForm>
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <TextInput source={a.name} label="Titre" fullWidth />
-      </Grid>
-      <Grid item xs={6}>
-        <WatchedSlugInput
-          sourceToWatch={a.name}
-          source={a.slug}
-          label="Slug"
-          disabled
-          fullWidth
-        />
-      </Grid>
-    </Grid>
-    <TextInput source={a.description} multiline fullWidth />
-    <Grid container spacing={2}>
-      <Grid item xs={4}>
-        <DateInput source={a.madeAt} label="Créée le" fullWidth />
-      </Grid>
-      <Grid
-        item
-        xs={4}
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <BooleanInput
-          source={a.showInGallery}
-          label="Afficher dans la galerie ?"
-        />
-      </Grid>
-    </Grid>
-
-    {/* <TextInput source={a.filename} />
-    <TextInput source={a.watermarkedFilename} />
-    <TextInput source={a.designState} /> */}
-  </SimpleForm>
-);

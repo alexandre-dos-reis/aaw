@@ -8,9 +8,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@aaw/prisma": "workspace:^0.0.0",
+    "@aaw/prisma": "workspace:*",
+    "@aaw/validation": "workspace:*",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@hookform/resolvers": "^2.9.11",
     "@material-ui/core": "^4.12.4",
     "@mui/material": "^5.11.10",
     "@uiw/react-color-circle": "^1.1.2",
@@ -24,9 +26,10 @@
     "react": "^18.2.0",
     "react-admin": "^4.8.1",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.2",
+    "react-hook-form": "^7.43.3",
     "slugify": "^1.6.5",
-    "vite-tsconfig-paths": "^4.0.5"
+    "vite-tsconfig-paths": "^4.0.5",
+    "zod": "^3.20.6"
   },
   "devDependencies": {
     "@types/chroma-js": "^2.4.0",
