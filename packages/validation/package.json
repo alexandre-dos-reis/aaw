@@ -5,7 +5,10 @@
   "module": "./src/index.ts",
   "types": "./src/index.ts",
   "peerDependencies": {
-    "zod": "^3.20.6",
-    "@aaw/prisma": "workspace:*"
+    "@aaw/prisma": "workspace:*",
+    "zod": "^3.20.6"
+  },
+  "devDependencies": {
+    "@aaw/tsconfig": "workspace:^0.0.0"
   }
 }

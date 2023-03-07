@@ -1,4 +1,4 @@
-import { Admin, ListGuesser, Resource } from "react-admin";
+import { Admin, Resource } from "react-admin";
 
 import { artworkResource } from "./resources/artwork";
 import { categoryResource } from "./resources/category";

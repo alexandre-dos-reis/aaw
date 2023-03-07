@@ -2,7 +2,7 @@ import { z } from "zod";
 import { errorKeymap } from "./errors.keymap";
 
 export const zOptionalDateString = z
-  .string()
+  .string() 
   .nullish()
   .transform((str) => (str ? new Date(str) : null));
 
@@ -14,6 +14,6 @@ export const zDateString = z
   .transform((str) => new Date(str));
 
 export const zStringRequired = z.string({
-  invalid_type_error: errorKeymap["string.required"],
-  required_error: errorKeymap["string.required"],
+  invalid_type_error: errorKeymap["field.required"],
+  required_error: errorKeymap["field.required"],
 });
