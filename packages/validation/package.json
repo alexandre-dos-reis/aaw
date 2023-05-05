@@ -9,6 +9,6 @@
     "zod": "^3.20.6"
   },
   "devDependencies": {
-    "@aaw/tsconfig": "workspace:^0.0.0"
+    "@aaw/tsconfig": "workspace:*"
   }
 }

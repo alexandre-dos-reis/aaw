@@ -2,19 +2,13 @@
 
 ## Todos
 
-# Storage
-
-- Setup docker
-
-# Admin
+### Admin
 
 - Setup auth
-- Implement validation with Zod and [Prisma Zod Generator](https://github.com/omar-dulaimi/prisma-zod-generator)
 
-# Api
+### Api
 
 - Setup auth
-- Implement validation with Zod and [Prisma Zod Generator](https://github.com/omar-dulaimi/prisma-zod-generator)
 - Add Prisma middleware for:
   - Soft delete
   - Update slug
@@ -25,3 +19,11 @@
 
 - [Turborepo example with Prisma](https://github.com/vercel/turbo/tree/main/examples/with-prisma)
 - [React-Admin data simple prisma](https://github.com/codeledge/ra-data-simple-prisma/tree/main/packages/ra-data-simple-prisma)
+
+### Auth
+
+- [Using cookies to store JWT for authentication and authorization in a MERN stack app](https://medium.com/@zahedialfurquan20/using-cookies-to-store-jwt-for-authentication-and-authorization-in-a-mern-stack-app-a58d7a5d6b6e)
+- [How does cookie-based authentication work?](https://stackoverflow.com/questions/17769011/how-does-cookie-based-authentication-work)
+- [Store Auth-Token in Cookie or Header?](https://security.stackexchange.com/questions/180357/store-auth-token-in-cookie-or-header)
+- [Authentication in SPA (ReactJS and VueJS) the right way](https://jcbaey.com/authentication-in-spa-reactjs-and-vuejs-the-right-way/)
+- [Build a RESTful API with Fastify, Prisma & TypeScript](https://www.youtube.com/watch?app=desktop&v=LMoMHP44-xM)
