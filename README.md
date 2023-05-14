@@ -21,6 +21,7 @@
 ## Front
 
 - Implement global layout
+  - Import fonts from the current production website
 
 ## Resources
 
