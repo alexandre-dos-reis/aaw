@@ -153,6 +153,9 @@ importers:
 
   apps/front:
     dependencies:
+      '@aaw/prisma':
+        specifier: workspace:^
+        version: link:../../packages/prisma
       '@types/node':
         specifier: 20.1.4
         version: 20.1.4

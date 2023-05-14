@@ -2,6 +2,9 @@
 
 ## Todos
 
+- Implement a global clean script
+- automatically build package
+
 ### Admin
 
 - Setup auth
@@ -14,6 +17,10 @@
   - Update slug
   - Update name for shop category with parent
   - transform date string to Date
+
+## Front
+
+- Implement global layout
 
 ## Resources
 
