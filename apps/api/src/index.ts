@@ -2,7 +2,8 @@ import Fastify from "fastify";
 import cors from "@fastify/cors";
 import { appOptions } from "~/config/app-options";
 import { prismaPlugin } from "~/plugins";
-import { reactAdminRoutes } from "~/routes";
+import { reactAdminModule } from "~/modules/react-admin";
+import { authRouter } from "./modules/auth/router";
 
 const app = Fastify(appOptions);
 
@@ -10,7 +11,8 @@ app.register(cors, {
   origin: "*",
 });
 app.register(prismaPlugin);
-app.register(reactAdminRoutes, { prefix: "/ra" });
+app.register(authRouter, { prefix: "/auth" });
+app.register(reactAdminModule, { prefix: "/ra" });
 
 const main = async () => {
   try {

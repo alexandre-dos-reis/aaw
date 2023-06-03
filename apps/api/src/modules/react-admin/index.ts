@@ -17,7 +17,7 @@ export type RaRequest = {
   };
 };
 
-export const reactAdminRoutes = async (app: FastifyInstance) => {
+export const reactAdminModule = async (app: FastifyInstance) => {
   app.post<RaRequest>("/*", (req, reply) => {
     if (
       req.body.method.startsWith("create") ||
@@ -35,12 +35,6 @@ export const reactAdminRoutes = async (app: FastifyInstance) => {
         }
 
         req.body.params.data = result.data;
-
-        defaultHandler(
-          { body: req.body as any },
-          { json: (data) => reply.send(data) },
-          app.prisma
-        );
       }
     }
 
