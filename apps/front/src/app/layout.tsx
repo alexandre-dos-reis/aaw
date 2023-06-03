@@ -22,14 +22,32 @@ export default async function RootLayout({
       disposition: "asc",
     },
   });
+
   return (
     <html lang="fr">
       <body className={inter.className}>
         <header>
           <ul>
+            <li>
+              <a href="/">Accueil</a>
+            </li>
+            <li>
+              <a href="/galerie">Galerie</a>
+            </li>
             {cats.map((c) => (
-              <li key={c.id}>{c.name}</li>
+              <li key={c.id}>
+                <a href={`/galerie/${c.slug}`}>{c.name}</a>
+              </li>
             ))}
+            <li>
+              <a href="/realisation">Realisation</a>
+            </li>
+            <li>
+              <a href="/manuscrit">Manuscrit</a>
+            </li>
+            <li>
+              <a href="/contact">Contact</a>
+            </li>
           </ul>
         </header>
 

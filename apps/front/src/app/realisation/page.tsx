@@ -1,9 +1,9 @@
 import { Heading } from "~/components/Heading";
 
-export default function Home() {
+export default async function () {
   return (
     <main>
-      <Heading>Accueil</Heading>
+      <Heading>Realisation</Heading>
     </main>
   );
 }
