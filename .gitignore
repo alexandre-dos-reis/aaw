@@ -38,3 +38,8 @@ yarn-error.log*
 # images for seed / fixtures
 images-samples/*
 !images-samples/.gitkeep
+
+# docker 
+docker/@aaw/volumes/**/*
+docker/@aaw/storage/**/*
+docker/@aaw/uploads/**/*

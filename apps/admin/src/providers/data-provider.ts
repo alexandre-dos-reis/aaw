@@ -5,7 +5,7 @@ import { resources } from "../resources/resources.map";
 import { env } from "../utils/env";
 
 export const dataProvider = withLifecycleCallbacks(
-  prismaDataProvider(env.VITE_API_URL),
+  prismaDataProvider(`${env.API_URL}/ra`),
   [
     {
       // Because Artwork_Category doesn't have an Id
