@@ -196,7 +196,7 @@ enum VAR_KEY_TYPE {
 }
 
 model ModelMutation {
-    id           String @id
+    id           String @id @default(cuid())
     model        String
     action       Action
     previousData Json
@@ -208,4 +208,13 @@ enum Action {
     EDIT
     CREATE
     DELETE
+}
+
+model User {
+    id       String @id @default(cuid())
+    email    String @unique
+    password String
+    name     String
+
+    @@map("users")
 }

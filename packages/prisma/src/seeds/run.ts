@@ -6,6 +6,7 @@ import {
   settingsSeed,
   purchasesSeed,
   imagesSeeds,
+  usersSeeds,
 } from ".";
 
 const prisma = new PrismaClient();
@@ -16,6 +17,7 @@ async function main() {
   await shopSeeds(prisma);
   await settingsSeed(prisma);
   await purchasesSeed(prisma);
+  await usersSeeds(prisma);
 }
 
 main()
