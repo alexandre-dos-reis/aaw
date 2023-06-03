@@ -48,7 +48,7 @@ export const ThumbnailField = (p: {
           height,
           zIndex,
         }}
-        src={`${env.VITE_IMAGE_URL}/${record[p.source]}`}
+        src={`${env.STORAGE_URL}/${record[p.source]}`}
       />
     </div>
   );
