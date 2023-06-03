@@ -2,19 +2,20 @@ import { CSSProperties, useState } from "react";
 import { RaRecord, useRecordContext } from "react-admin";
 import { env } from "~/utils/env";
 
+const INITIAL_HEIGHT = 50;
+const INITIAL_Z_INDEX = 0;
+const INITIAL_POSITION: CSSProperties["position"] = "static";
+
 export const ThumbnailField = (p: {
   source: keyof RaRecord;
   label?: string;
 }) => {
   const record = useRecordContext();
-  const initialHeight = 50;
-  const initialzIndex = 0;
-  const initialPosition: CSSProperties["position"] = "static";
 
-  const [height, setHeight] = useState(initialHeight);
-  const [zIndex, setZIndex] = useState(initialzIndex);
+  const [height, setHeight] = useState(INITIAL_HEIGHT);
+  const [zIndex, setZIndex] = useState(INITIAL_Z_INDEX);
   const [position, setPosition] =
-    useState<CSSProperties["position"]>(initialPosition);
+    useState<CSSProperties["position"]>(INITIAL_POSITION);
 
   const onMouseEnter = () => {
     setHeight(200);
@@ -23,9 +24,9 @@ export const ThumbnailField = (p: {
   };
 
   const onMouseLeave = () => {
-    setHeight(initialHeight);
-    setZIndex(initialzIndex);
-    setPosition(initialPosition);
+    setHeight(INITIAL_HEIGHT);
+    setZIndex(INITIAL_Z_INDEX);
+    setPosition(INITIAL_POSITION);
   };
 
   return (
@@ -34,7 +35,7 @@ export const ThumbnailField = (p: {
       onMouseLeave={onMouseLeave}
       style={{
         position: "relative",
-        height: initialHeight,
+        height: INITIAL_HEIGHT,
         display: "flex",
         justifyContent: "center",
         alignItems: "center",

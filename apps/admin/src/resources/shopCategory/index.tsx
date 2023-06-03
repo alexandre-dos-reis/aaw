@@ -1,5 +1,5 @@
 import type { ShopCategory, Category } from "@aaw/prisma";
-import { Grid } from "@mui/material";
+import { Grid, Popover } from "@mui/material";
 import {
   Create,
   Datagrid,
@@ -79,7 +79,7 @@ const Form = () => (
 const CategoryField = () => {
   const record = useRecordContext<ShopCategory>();
 
-  const parentRecord = useGetOne<ShopCategory>(
+  const { data: parentRecord } = useGetOne<ShopCategory>(
     r.ShopCategory.name,
     {
       id: record.parentCategoryId || "",
@@ -90,7 +90,7 @@ const CategoryField = () => {
   );
 
   const name = record.parentCategoryId
-    ? `${parentRecord.data?.name} ${record.name}`
+    ? `${parentRecord?.name} ${record.name}`
     : `${record.name}`;
 
   return <div>{name}</div>;

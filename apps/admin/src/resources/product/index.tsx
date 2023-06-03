@@ -32,7 +32,7 @@ const sc = r.ShopCategory.fields;
 const CategoryField = () => {
   const record = useRecordContext<ShopCategory>();
 
-  const parentRecord = useGetOne<ShopCategory>(
+  const { data: parentRecord, isLoading } = useGetOne<ShopCategory>(
     r.ShopCategory.name,
     {
       id: record.parentCategoryId || "",
@@ -42,8 +42,10 @@ const CategoryField = () => {
     }
   );
 
+  if (isLoading) return null;
+
   const name = record.parentCategoryId
-    ? `${parentRecord.data?.name} ${record.name}`
+    ? `${parentRecord?.name} ${record.name}`
     : `${record.name}`;
 
   return <div>{name}</div>;
@@ -148,3 +150,7 @@ const Form = () => (
     </Grid>
   </SimpleForm>
 );
+
+const ShopCategoryInput = () => {
+  return <div></div>;
+};
