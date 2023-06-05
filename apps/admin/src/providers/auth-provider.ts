@@ -19,6 +19,7 @@ export const authProvider: AuthProvider = {
       const json: { token: string } = await res.json();
       const user: { email: string; name: string; id: string } = jwt(json.token);
 
+      typedLocalStorage.set("auth", json);
       typedLocalStorage.set("user", {
         id: user.id,
         name: user.name,
@@ -32,6 +33,7 @@ export const authProvider: AuthProvider = {
   },
   logout: () => {
     typedLocalStorage.remove("user");
+    typedLocalStorage.remove("auth");
     return Promise.resolve();
   },
   checkAuth: () =>

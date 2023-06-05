@@ -4,6 +4,9 @@ interface Keymaps {
     name: string;
     email: string;
   };
+  auth: {
+    token: string;
+  };
 }
 
 type Key = keyof Keymaps;
