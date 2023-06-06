@@ -17,6 +17,7 @@ app.register(cors, {
 
 // https://stackoverflow.com/questions/66004037/cookies-with-cors
 // https://cors-errors.info/faq#cdc8
+// https://github.com/josue/docker-caddy-reverse-proxy
 
 app.register(cookie);
 app.register(userPlugin);
