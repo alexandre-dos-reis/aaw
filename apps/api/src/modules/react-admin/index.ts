@@ -24,24 +24,25 @@ export const reactAdminModule = async (app: FastifyInstance) => {
       preHandler: [app.privateRoute],
     },
     (req, reply) => {
-      if (
-        req.body.method.startsWith("create") ||
-        req.body.method.startsWith("update")
-      ) {
-        if (req.body.resource === "Artwork") {
-          const schema =
-            raZodResourceValidation[req.body.resource]()[req.body.method];
-          const result = schema.safeParse(req.body.params.data);
-
-          if (!result.success) {
-            return reply.code(400).send({
-              errors: result.error.flatten().fieldErrors,
-            });
-          }
-
-          req.body.params.data = result.data;
-        }
-      }
+      console.log({ COOKIE: req.cookies.session });
+      // if (
+      //   req.body.method.startsWith("create") ||
+      //   req.body.method.startsWith("update")
+      // ) {
+      //   if (req.body.resource === "Artwork") {
+      //     const schema =
+      //       raZodResourceValidation[req.body.resource]()[req.body.method];
+      //     const result = schema.safeParse(req.body.params.data);
+      //
+      //     if (!result.success) {
+      //       return reply.code(400).send({
+      //         errors: result.error.flatten().fieldErrors,
+      //       });
+      //     }
+      //
+      //     req.body.params.data = result.data;
+      //   }
+      // }
 
       defaultHandler(
         { body: req.body as any },

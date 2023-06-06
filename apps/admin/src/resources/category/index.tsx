@@ -54,15 +54,6 @@ const Form = () => (
       <Grid item xs={6}>
         <TextInput source={c.name} fullWidth label="Titre" />
       </Grid>
-      <Grid item xs={6}>
-        <WatchedSlugInput
-          sourceToWatch={c.name}
-          source={c.slug}
-          label="Slug"
-          disabled
-          fullWidth
-        />
-      </Grid>
     </Grid>
     <TextInput source={c.description} fullWidth multiline />
     <Grid container spacing={2}>

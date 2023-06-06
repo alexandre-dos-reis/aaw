@@ -1,5 +1,6 @@
 import Fastify from "fastify";
 import cors from "@fastify/cors";
+import cookie from "@fastify/cookie";
 import { appOptions } from "~/config/app-options";
 import { prismaPlugin } from "~/plugins";
 import { reactAdminModule } from "~/modules/react-admin";
@@ -10,8 +11,14 @@ import { privateRoutePlugin } from "./plugins/private-routes-plugin";
 const app = Fastify(appOptions);
 
 app.register(cors, {
-  origin: "*",
+  credentials: true,
+  origin: "http://127.0.0.1:5173",
 });
+
+// https://stackoverflow.com/questions/66004037/cookies-with-cors
+// https://cors-errors.info/faq#cdc8
+
+app.register(cookie);
 app.register(userPlugin);
 app.register(privateRoutePlugin);
 app.register(prismaPlugin);

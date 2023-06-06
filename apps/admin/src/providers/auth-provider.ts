@@ -8,7 +8,11 @@ export const authProvider: AuthProvider = {
     const req = new Request(`${env.API_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({ email: username, password }),
-      headers: new Headers({ "Content-Type": "application/json" }),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=utf-8",
+        Accept: "application/json",
+      }),
+      credentials: "include",
     });
 
     try {

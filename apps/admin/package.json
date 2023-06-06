@@ -19,7 +19,7 @@
     "@uiw/react-color-github": "^1.1.2",
     "chroma-js": "^2.4.2",
     "jwt-decode": "^3.1.2",
-    "ra-data-simple-prisma": "^2.1.2",
+    "ra-data-simple-prisma": "^2.3.1",
     "ra-i18n-polyglot": "^4.8.1",
     "ra-input-rich-text": "^4.8.1",
     "ra-language-french": "^4.8.1",

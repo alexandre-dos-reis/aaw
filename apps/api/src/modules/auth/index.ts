@@ -34,7 +34,16 @@ export const authModule = async (app: FastifyInstance) => {
         "secret"
       );
 
-      return { token };
+      reply
+        .setCookie("session_id", "my-cookie-value", {
+          domain: "localhost:3002",
+          sameSite: "none",
+          maxAge: 31536000,
+          path: "/",
+          httpOnly: true,
+          secure: false,
+        })
+        .send({ token });
     }
   );
 

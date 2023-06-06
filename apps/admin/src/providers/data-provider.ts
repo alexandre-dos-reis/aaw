@@ -9,8 +9,9 @@ const token = typedLocalStorage.get("auth")?.token;
 
 export const dataProvider = withLifecycleCallbacks(
   prismaDataProvider(`${env.API_URL}/ra`, {
+    withCredentials: true,
     headers: {
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   }),
   [

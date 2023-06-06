@@ -12,29 +12,12 @@ const a = r.Artwork.fields;
 export const Form = (p: { type: "edit" | "create" }) => {
   const { save } = useSave({ type: "edit", model: r.Artwork.name });
   return (
-    <SimpleForm
-      noValidate
-      mode="all"
-      onSubmit={save}
-      resolver={zodResolver(
-        raZodResourceValidation["Artwork"]()[
-          p.type === "edit" ? "update" : "create"
-        ]
-      )}
-    >
+    <SimpleForm noValidate mode="all" onSubmit={save}>
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextInput source={a.name} label="Titre" fullWidth />
         </Grid>
-        <Grid item xs={6}>
-          <WatchedSlugInput
-            sourceToWatch={a.name}
-            source={a.slug}
-            label="Slug"
-            disabled
-            fullWidth
-          />
-        </Grid>
+        <Grid item xs={6}></Grid>
       </Grid>
       <TextInput source={a.description} multiline fullWidth />
       <Grid container spacing={2}>
