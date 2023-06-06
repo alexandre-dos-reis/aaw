@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { LoginBody, loginJsonSchema } from "./schema";
 
-import jwt from "jsonwebtoken";
 import argon2 from "argon2";
+import { jwtEncode } from "~/utils/jwt";
 
 export const authModule = async (app: FastifyInstance) => {
   app.post<{ Body: LoginBody }>(
@@ -25,25 +25,13 @@ export const authModule = async (app: FastifyInstance) => {
         });
       }
 
-      const token = jwt.sign(
-        {
-          id: user.id,
-          email,
-          name: user.name,
-        },
-        "secret"
-      );
+      const token = jwtEncode({
+        id: user.id,
+        email,
+        name: user.name,
+      });
 
-      reply
-        .setCookie("session_id", "my-cookie-value", {
-          domain: "localhost:3002",
-          sameSite: "none",
-          maxAge: 31536000,
-          path: "/",
-          httpOnly: true,
-          secure: false,
-        })
-        .send({ token });
+      reply.setCookie("session_id", "my-cookie-value").send({ token });
     }
   );
 

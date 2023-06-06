@@ -24,7 +24,7 @@ export const reactAdminModule = async (app: FastifyInstance) => {
       preHandler: [app.privateRoute],
     },
     (req, reply) => {
-      console.log({ COOKIE: req.cookies.session });
+      console.log({ COOKIE: req.cookies.session_id });
       // if (
       //   req.body.method.startsWith("create") ||
       //   req.body.method.startsWith("update")

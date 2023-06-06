@@ -35,3 +35,6 @@
 - [Store Auth-Token in Cookie or Header?](https://security.stackexchange.com/questions/180357/store-auth-token-in-cookie-or-header)
 - [Authentication in SPA (ReactJS and VueJS) the right way](https://jcbaey.com/authentication-in-spa-reactjs-and-vuejs-the-right-way/)
 - [Build a RESTful API with Fastify, Prisma & TypeScript](https://www.youtube.com/watch?app=desktop&v=LMoMHP44-xM)
+- https://stackoverflow.com/questions/66004037/cookies-with-cors
+- https://cors-errors.info/faq#cdc8
+- https://github.com/josue/docker-caddy-reverse-proxy

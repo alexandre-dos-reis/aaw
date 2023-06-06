@@ -1,3 +1,4 @@
+import "dotenv/config";
 import Fastify from "fastify";
 import cors from "@fastify/cors";
 import cookie from "@fastify/cookie";
@@ -7,19 +8,13 @@ import { reactAdminModule } from "~/modules/react-admin";
 import { authModule } from "./modules/auth";
 import { userPlugin } from "./plugins/user-plugin";
 import { privateRoutePlugin } from "./plugins/private-routes-plugin";
+import { cookieOptions } from "./config/cookie-options";
+import { corsOptions } from "./config/cors-options";
 
 const app = Fastify(appOptions);
 
-app.register(cors, {
-  credentials: true,
-  origin: "http://127.0.0.1:5173",
-});
-
-// https://stackoverflow.com/questions/66004037/cookies-with-cors
-// https://cors-errors.info/faq#cdc8
-// https://github.com/josue/docker-caddy-reverse-proxy
-
-app.register(cookie);
+app.register(cors, corsOptions);
+app.register(cookie, cookieOptions);
 app.register(userPlugin);
 app.register(privateRoutePlugin);
 app.register(prismaPlugin);

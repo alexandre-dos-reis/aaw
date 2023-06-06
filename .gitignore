@@ -43,3 +43,4 @@ images-samples/*
 docker/@aaw/volumes/**/*
 docker/@aaw/storage/**/*
 docker/@aaw/uploads/**/*
+docker/@aaw/certs/**/*

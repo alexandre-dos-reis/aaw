@@ -1,5 +1,20 @@
-version: '3.6'
+networks:
+  "@aaw":
+
 services:
+  caddy:
+    image: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./volumes/caddy/data:/data
+      - ./volumes/caddy/config:/config
+      - ./certs:/data/certs
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+    networks:
+      - "@aaw"
+
   database:
     image: postgres:15-alpine
     restart: always
@@ -12,8 +27,8 @@ services:
     environment:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: ${POSTGRES_DB}    
-  
+      POSTGRES_DB: ${POSTGRES_DB}
+
   storage:
     image: quay.io/minio/minio:latest
     command: server /data --console-address ":9001"
@@ -21,11 +36,8 @@ services:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
     ports:
-      - '${MINIO_PORT}:9000'
-      - '${MINIO_CONSOLE_PORT}:9001'
+      - "${MINIO_PORT}:9000"
+      - "${MINIO_CONSOLE_PORT}:9001"
     volumes:
       - ./storage/data:/data
     restart: unless-stopped
-
-networks:
-  "@aaw":
