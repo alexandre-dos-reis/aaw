@@ -1,7 +1,13 @@
-export const ENV = {
-  CORS_ORIGIN_URL: process.env.CORS_ORIGIN_URL as string,
-  COOKIE_DOMAIN: process.env.COOKIE_DOMAIN as string,
-  COOKIE_SECRET: process.env.COOKIE_SECRET as string,
-  COOKIE_SESSION_ID: process.env.COOKIE_SESSION_ID as string,
-  JWT_SECRET: process.env.JWT_SECRET as string,
-};
+import { z } from "zod";
+import { validateEnv } from "@aaw/validation";
+
+export const ENV = validateEnv(
+  z.object({
+    CORS_ORIGIN_URL: z.string().url(),
+    COOKIE_DOMAIN: z.string().min(1),
+    COOKIE_SECRET: z.string().min(1),
+    COOKIE_SESSION_ID: z.string().min(1),
+    JWT_SECRET: z.string().min(1),
+  }),
+  process.env
+);
