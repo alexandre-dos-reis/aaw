@@ -3,6 +3,7 @@ import { LoginBody, loginJsonSchema } from "./schema";
 
 import argon2 from "argon2";
 import { jwtEncode } from "~/utils/jwt";
+import { ENV } from "~/utils/env";
 
 export const authModule = async (app: FastifyInstance) => {
   app.post<{ Body: LoginBody }>(
@@ -31,9 +32,17 @@ export const authModule = async (app: FastifyInstance) => {
         name: user.name,
       });
 
-      reply.setCookie("session_id", "my-cookie-value").send({ token });
+      return reply
+        .setCookie("SESSION_ID", ENV.COOKIE_SESSION_ID)
+        .send({ token });
     }
   );
+
+  app.post("/logout", async (_, reply) => {
+    return reply
+      .clearCookie("SESSION_ID")
+      .send({ message: "You have been sucessfully logged out !" });
+  });
 
   app.log.info("Auth routes registered.");
 };

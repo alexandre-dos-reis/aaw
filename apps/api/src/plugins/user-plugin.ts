@@ -1,6 +1,8 @@
 import { FastifyInstance, FastifyPluginAsync } from "fastify";
 import fp from "fastify-plugin";
 import jwt from "jsonwebtoken";
+import { ENV } from "~/utils/env";
+import { jwtVerify } from "~/utils/jwt";
 
 type User = {
   id: string;
@@ -27,7 +29,7 @@ export const userPlugin: FastifyPluginAsync = fp(
 
       try {
         const token = authHeader.replace("Bearer ", "");
-        const user = jwt.verify(token, "secret") as User;
+        const user = jwtVerify<User>(token);
         request.user = user;
       } catch (e) {}
     });
