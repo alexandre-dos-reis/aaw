@@ -1,5 +1,5 @@
 (common) {
-  encode gzip
+        encode gzip
 	tls "/data/certs/local.cert.pem" "/data/certs/local.key.pem"
 }
 
