@@ -1,28 +1,29 @@
-(ssl_certs) {
+(common) {
+  encode gzip
 	tls "/data/certs/local.cert.pem" "/data/certs/local.key.pem"
 }
 
 aaw.local {
-	import ssl_certs
+	import common
 	reverse_proxy host.docker.internal:3000
 }
 
 api.aaw.local {
-	import ssl_certs
+	import common
 	reverse_proxy host.docker.internal:3002
 }
 
 admin.aaw.local {
-	import ssl_certs
+	import common
 	reverse_proxy host.docker.internal:5173
 }
 
 storage.aaw.local {
-	import ssl_certs
-	reverse_proxy host.docker.internal:9000
+	import common
+	reverse_proxy aaw_storage:9000
 }
 
 storage-console.aaw.local {
-	import ssl_certs
-	reverse_proxy host.docker.internal:9001
+	import common
+	reverse_proxy aaw_storage:9001
 }
