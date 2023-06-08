@@ -1,11 +1,11 @@
 import { AuthProvider } from "react-admin";
-import { env } from "~/utils/env";
+import { ENV } from "~/utils/env";
 import jwt from "jwt-decode";
 import { typedLocalStorage } from "~/utils/typed-local-storage";
 
 export const authProvider: AuthProvider = {
   login: async ({ username, password }) => {
-    const req = new Request(`${env.API_URL}/auth/login`, {
+    const req = new Request(`${ENV.API_URL}/auth/login`, {
       method: "POST",
       body: JSON.stringify({ email: username, password }),
       headers: new Headers({

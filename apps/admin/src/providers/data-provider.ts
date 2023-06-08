@@ -3,12 +3,12 @@ import { dataProvider as prismaDataProvider } from "ra-data-simple-prisma";
 import { Identifier, withLifecycleCallbacks } from "react-admin";
 import { typedLocalStorage } from "~/utils/typed-local-storage";
 import { resources } from "../resources/resources.map";
-import { env } from "../utils/env";
+import { ENV } from "../utils/env";
 
 const token = typedLocalStorage.get("auth")?.token;
 
 export const dataProvider = withLifecycleCallbacks(
-  prismaDataProvider(`${env.API_URL}/ra`, {
+  prismaDataProvider(`${ENV.API_URL}/ra`, {
     withCredentials: true,
     headers: {
       Authorization: `Bearer ${token}`,

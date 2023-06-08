@@ -2,17 +2,26 @@ import { Grid } from "@mui/material";
 import { SimpleForm, TextInput, DateInput, BooleanInput } from "react-admin";
 import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
 import { useSave } from "~/hooks/useSave";
-import { raZodResourceValidation } from "@aaw/validation";
+import { getResourceSchema } from "@aaw/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { resources as r } from "~/resources/resources.map";
-// import { z } from "zod";
 
 const a = r.Artwork.fields;
 
 export const Form = (p: { type: "edit" | "create" }) => {
   const { save } = useSave({ type: "edit", model: r.Artwork.name });
   return (
-    <SimpleForm noValidate mode="all" onSubmit={save}>
+    <SimpleForm
+      noValidate
+      mode="all"
+      resolver={zodResolver(
+        getResourceSchema({
+          resource: "Artwork",
+          method: p.type === "edit" ? "update" : "create",
+        })
+      )}
+      onSubmit={save}
+    >
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextInput source={a.name} label="Titre" fullWidth />

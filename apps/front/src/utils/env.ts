@@ -1,3 +1,9 @@
-export const ENV = {
-  STORAGE_URL: process.env.NEXT_PUBLIC_STORAGE_URL,
-};
+import { z } from "zod";
+import { validateEnv } from "@aaw/validation";
+
+export const ENV = validateEnv({
+  schema: z.object({
+    STORAGE_URL: z.string().url(),
+  }),
+  data: process.env,
+});

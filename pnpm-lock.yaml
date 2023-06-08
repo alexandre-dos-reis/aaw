@@ -183,6 +183,9 @@ importers:
       '@aaw/prisma':
         specifier: workspace:^
         version: link:../../packages/prisma
+      '@aaw/validation':
+        specifier: workspace:^
+        version: link:../../packages/validation
       '@types/node':
         specifier: 20.1.4
         version: 20.1.4
@@ -219,6 +222,9 @@ importers:
       typescript:
         specifier: 5.0.4
         version: 5.0.4
+      zod:
+        specifier: ^3.20.6
+        version: 3.21.4
 
   packages/minio:
     dependencies:

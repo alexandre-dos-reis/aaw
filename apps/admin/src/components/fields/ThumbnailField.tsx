@@ -1,6 +1,6 @@
 import { CSSProperties, useState } from "react";
 import { RaRecord, useRecordContext } from "react-admin";
-import { env } from "~/utils/env";
+import { ENV } from "~/utils/env";
 
 const INITIAL_HEIGHT = 50;
 const INITIAL_Z_INDEX = 0;
@@ -48,7 +48,7 @@ export const ThumbnailField = (p: {
           height,
           zIndex,
         }}
-        src={`${env.STORAGE_URL}/${record[p.source]}`}
+        src={`${ENV.STORAGE_URL}/${record[p.source]}`}
       />
     </div>
   );
