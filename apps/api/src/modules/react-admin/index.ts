@@ -1,7 +1,7 @@
 import { FastifyInstance } from "fastify";
 import { defaultHandler } from "ra-data-simple-prisma";
 import {
-  raZodResourceValidation,
+  getResourceSchema,
   ModelExtracted,
   MethodExtracted,
 } from "@aaw/validation";
@@ -29,8 +29,11 @@ export const reactAdminModule = async (app: FastifyInstance) => {
         req.body.method.startsWith("update")
       ) {
         if (req.body.resource === "Artwork") {
-          const schema =
-            raZodResourceValidation[req.body.resource]()[req.body.method];
+          const schema = getResourceSchema({
+            method: req.body.method,
+            resource: req.body.resource,
+          });
+
           const result = schema.safeParse(req.body.params.data);
 
           if (!result.success) {
