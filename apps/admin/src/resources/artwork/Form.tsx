@@ -1,6 +1,5 @@
 import { Grid } from "@mui/material";
 import { SimpleForm, TextInput, DateInput, BooleanInput } from "react-admin";
-import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
 import { useSave } from "~/hooks/useSave";
 import { getResourceSchema } from "@aaw/validation";
 import { zodResolver } from "@hookform/resolvers/zod";

@@ -1,15 +1,16 @@
-import { ZodTypeAny } from "zod";
+import { z } from "zod";
 import { ArtworkSchemas } from "./schemas";
+
+import { Prisma } from "@aaw/prisma/browser";
+
+const model = Prisma.ModelName;
 
 export type ModelExtracted = "Artwork";
 export type MethodExtracted = "create" | "update";
-export type SingleResourceSchemaKeymap = Record<MethodExtracted, ZodTypeAny>;
+export type SingleResourceSchemaKeymap = Record<MethodExtracted, z.Schema>;
 
-const resourcesSchemaKeymap: Record<
-  ModelExtracted,
-  SingleResourceSchemaKeymap
-> = {
-  Artwork: ArtworkSchemas,
+const resourcesSchemaKeymap = {
+  [model.Artwork]: ArtworkSchemas,
 };
 
 export const getResourceSchema = (args: {
