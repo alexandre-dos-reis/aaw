@@ -36,11 +36,14 @@ yarn-error.log*
 **/dist
 
 # images for seed / fixtures
-images-samples/*
-!images-samples/.gitkeep
+**/images-samples/*
+**/!images-samples/.gitkeep
 
 # docker 
-docker/@aaw/volumes/**/*
-docker/@aaw/storage/**/*
-docker/@aaw/uploads/**/*
-docker/@aaw/certs/**/*
+infra/volumes/**/*
+infra/storage/**/*
+infra/uploads/**/*
+infra/certs/**/*
+
+# Taskfile
+.task

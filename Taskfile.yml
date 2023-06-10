@@ -1,0 +1,86 @@
+version: "3"
+
+# silent: true
+
+vars:
+  DOCKER_COMPOSE: docker compose
+  DOCKER_COMPOSE_PATH: infra
+  DOCKER_COMPOSE_FILE: compose.yml
+
+  ENV_FILE: .env
+
+  PKG_PATH: ./packages
+  PKG_PRISMA_PATH: "{{.PKG_PATH}}/prisma"
+  PRISMA_SCHEMA: "{{.PKG_PRISMA_PATH}}/src/schema.prisma"
+  PRISMA_EXEC: "pnpm exec prisma"
+
+tasks:
+  # DATABASE
+  prisma:build:
+    deps:
+      - task: docker:up
+        vars: { ARGS: "{{.ARGS}}" }
+    sources:
+      - "{{.PKG_PRISMA_PATH}}/src/**/*.*"
+    generates:
+      - "{{.PKG_PRISMA_PATH}}/dist/**/*.*"
+    cmds:
+      - pnpm --filter prisma build
+
+  db:migration:create:
+    deps:
+      - task: docker:up
+        vars: { ARGS: "-d" }
+    cmds:
+      - "{{.PRISMA_EXEC}} migrate dev --schema={{.PRISMA_SCHEMA}}"
+
+  db:migration:migrate:
+    deps:
+      - task: docker:up
+        vars: { ARGS: "-d" }
+    cmds:
+      - "{{.PRISMA_EXEC}} migrate deploy --schema={{.PRISMA_SCHEMA}}"
+
+  db:seed:
+    deps:
+      - task: docker:up
+        vars: { ARGS: "-d" }
+    cmds:
+      - "{{.PRISMA_EXEC}} migrate reset --force --skip-seed --schema={{.PRISMA_SCHEMA}}"
+      - "{{.PRISMA_EXEC}} db push --skip-generate --schema={{.PRISMA_SCHEMA}}"
+      - pnpm exec tsx {{.PKG_PRISMA_PATH}}/src/seeds/run.ts
+
+  # DOCKER
+  docker:up:
+    cmds:
+      - "{{.DOCKER_COMPOSE}} --env-file {{.ENV_FILE}} -f {{.DOCKER_COMPOSE_PATH}}/{{.DOCKER_COMPOSE_FILE}} up {{.ARGS}}"
+
+  docker:down:
+    cmds:
+      - "{{.DOCKER_COMPOSE}} --env-file {{.ENV_FILE}} -f {{.DOCKER_COMPOSE_PATH}}/{{.DOCKER_COMPOSE_FILE}} down"
+
+  # CADDY
+  caddy:format:
+    description: Format Caddyfile with caddy fmt
+    deps:
+      - task: docker:up
+        vars: { ARGS: "-d" }
+
+    cmds:
+      - docker exec aaw_caddy caddy fmt /etc/caddy/Caddyfile
+      - task: docker:down
+
+  # MAIN
+  dev:
+    deps:
+      - task: prisma:build
+        vars: { ARGS: "-d" }
+    cmds:
+      - pnpm dev
+
+  install:
+    cmds:
+      - pnpm install
+      - task: prisma:build
+        vars: { ARGS: "-d" }
+      - defer: { task: docker:down }

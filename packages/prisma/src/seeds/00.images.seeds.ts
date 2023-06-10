@@ -6,7 +6,7 @@ import { createId } from "@paralleldrive/cuid2";
 export async function imagesSeeds() {
   const bucketName = process.env.MINIO_IMAGES_BUCKET_NAME as string;
   const region = process.env.MINIO_REGION as string;
-  const imageDir = path.join(__dirname, "../../../../", "images-samples");
+  const imageDir = path.join(__dirname, "images-samples");
 
   if (!(await minio.bucketExists(bucketName))) {
     console.log(

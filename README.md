@@ -5,10 +5,6 @@
 - Implement a global clean script
 - automatically build package
 
-### Admin
-
-- Setup auth
-
 ### Api
 
 - Setup auth
@@ -38,3 +34,7 @@
 - https://stackoverflow.com/questions/66004037/cookies-with-cors
 - https://cors-errors.info/faq#cdc8
 - https://github.com/josue/docker-caddy-reverse-proxy
+
+## Makefile
+
+- [makefile example](https://gitlab.com/freereads/freereads/-/blob/main/Makefile)
