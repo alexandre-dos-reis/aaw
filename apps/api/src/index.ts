@@ -10,7 +10,6 @@ import { userPlugin } from "./plugins/user-plugin";
 import { privateRoutePlugin } from "./plugins/private-routes-plugin";
 import { cookieOptions } from "./config/cookie-options";
 import { corsOptions } from "./config/cors-options";
-import { ENV } from "./utils/env";
 
 const app = Fastify(appOptions);
 

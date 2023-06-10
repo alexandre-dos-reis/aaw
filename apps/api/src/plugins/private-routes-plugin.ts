@@ -18,13 +18,6 @@ export const privateRoutePlugin: FastifyPluginAsync = fp(
     app.decorate(
       "privateRoute",
       async (req: FastifyRequest, reply: FastifyReply) => {
-        console.log({
-          USER: req.user,
-          SESSION:
-            !req.user || req.cookies.SESSION_ID !== ENV.COOKIE_SESSION_ID,
-          COOKIE: req.cookies.SESSION_ID,
-          ENV_COOKIE: ENV.COOKIE_SESSION_ID,
-        });
         if (!req.user || req.cookies.SESSION_ID !== ENV.COOKIE_SESSION_ID) {
           return reply
             .code(403)
