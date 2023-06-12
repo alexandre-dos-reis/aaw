@@ -16,7 +16,6 @@ import {
   TextInput,
 } from "react-admin";
 import { ColorPickerInput } from "~/components/inputs/ColorPickerInput";
-import { WatchedSlugInput } from "~/components/inputs/WatchedSlugInput";
 import { resources as r } from "~/resources/resources.map";
 
 const c = r.Category.fields;

@@ -1,5 +1,5 @@
-import type { ShopCategory, Category } from "@aaw/prisma";
-import { Grid, Popover } from "@mui/material";
+import type { ShopCategory } from "@aaw/prisma";
+import { Grid } from "@mui/material";
 import {
   Create,
   Datagrid,
@@ -12,9 +12,8 @@ import {
   SimpleForm,
   TextField,
   TextInput,
-  useGetOne,
-  useRecordContext,
 } from "react-admin";
+import { ParentCategoryField } from "~/components/domain/ParentCategoryField";
 import { resources as r } from "~/resources/resources.map";
 
 const sc = r.ShopCategory.fields;
@@ -50,48 +49,34 @@ export const shopCategoryResource: ResourceProps = {
   ),
 };
 
-const Form = () => (
-  <SimpleForm>
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <TextInput source={sc.name} label="Titre" fullWidth />
+const Form = () => {
+  return (
+    <SimpleForm>
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <TextInput source={sc.name} label="Titre" fullWidth />
+        </Grid>
+        <Grid item xs={6}>
+          <TextInput source={sc.slug} disabled fullWidth />
+        </Grid>
       </Grid>
-      <Grid item xs={6}>
-        <TextInput source={sc.slug} disabled fullWidth />
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <ReferenceInput
+            source={sc.parentCategoryId}
+            reference={r.ShopCategory.name}
+          >
+            <SelectInput
+              label="Catégorie parente"
+              fullWidth
+              optionText={<ParentCategoryField />}
+            />
+          </ReferenceInput>
+        </Grid>
+        <Grid item xs={3}>
+          <TextInput source={sc.disposition} fullWidth />
+        </Grid>
       </Grid>
-    </Grid>
-    <Grid container spacing={2}>
-      <Grid item xs={6}>
-        <ReferenceInput
-          source={sc.parentCategoryId}
-          reference={r.ShopCategory.name}
-        >
-          <SelectInput label="Catégorie associée" fullWidth />
-        </ReferenceInput>
-      </Grid>
-      <Grid item xs={3}>
-        <TextInput source={sc.disposition} fullWidth />
-      </Grid>
-    </Grid>
-  </SimpleForm>
-);
-
-const CategoryField = () => {
-  const record = useRecordContext<ShopCategory>();
-
-  const { data: parentRecord } = useGetOne<ShopCategory>(
-    r.ShopCategory.name,
-    {
-      id: record.parentCategoryId || "",
-    },
-    {
-      enabled: !!record.parentCategoryId,
-    }
+    </SimpleForm>
   );
-
-  const name = record.parentCategoryId
-    ? `${parentRecord?.name} ${record.name}`
-    : `${record.name}`;
-
-  return <div>{name}</div>;
 };
