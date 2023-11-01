@@ -30,7 +30,7 @@ const FormImageField = (p: { source: string }) => {
         justifyContent: "center",
       }}
     >
-      <img src={`${ENV.STORAGE_URL}/${record[p.source]}`} height="200px" />
+      <img src={`${ENV.STORAGE_URL}/${record[p.source]}`} height="300px" />
     </Container>
   );
 };
@@ -52,15 +52,24 @@ export const Form = (p: { type: "edit" | "create" }) => {
     >
       <TabbedForm.Tab label="Informations">
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={3}>
             <FormImageField source={a.filename} />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={9}>
             <TextInput source={a.name} label="Titre" fullWidth />
+            <TextInput source={a.description} multiline fullWidth />
           </Grid>
-          <Grid item xs={6}></Grid>
         </Grid>
-        <TextInput source={a.description} multiline fullWidth />
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <SelectArrayInput
+              fullWidth
+              source="categories"
+              label="Catégories"
+              choices={categories}
+            />
+          </Grid>
+        </Grid>
         <Grid container spacing={2}>
           <Grid item xs={4}>
             <DateInput source={a.madeAt} label="Créée le" fullWidth />
@@ -77,16 +86,6 @@ export const Form = (p: { type: "edit" | "create" }) => {
             <BooleanInput
               source={a.showInGallery}
               label="Afficher dans la galerie ?"
-            />
-          </Grid>
-        </Grid>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <SelectArrayInput
-              fullWidth
-              source="categories"
-              label="Catégories"
-              choices={categories}
             />
           </Grid>
         </Grid>

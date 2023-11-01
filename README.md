@@ -24,6 +24,12 @@
 - [Turborepo example with Prisma](https://github.com/vercel/turbo/tree/main/examples/with-prisma)
 - [React-Admin data simple prisma](https://github.com/codeledge/ra-data-simple-prisma/tree/main/packages/ra-data-simple-prisma)
 
+### Prisma
+
+- [Prisma Middleware](https://www.prisma.io/docs/concepts/components/prisma-client/middleware)
+- [Prisma Functional units](https://www.prisma.io/dataguide/datamodeling/functional-units)
+- [Prisma Real-time Database Events](https://github.com/prisma/prisma/issues/905)
+
 ### Auth
 
 - [Using cookies to store JWT for authentication and authorization in a MERN stack app](https://medium.com/@zahedialfurquan20/using-cookies-to-store-jwt-for-authentication-and-authorization-in-a-mern-stack-app-a58d7a5d6b6e)
